@@ -90,7 +90,7 @@ export default function MainHeader() {
 
   return (
     <>
-    <header className="w-full left-0 right-0 bg-white/60 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50 shadow-md">
+    <header className="w-full left-0 right-0 bg-white/60 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50 shadow-md py-2">
       <div className="mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex items-center justify-between h-23 md:h-27">
           {/* Logo */}
@@ -105,7 +105,7 @@ export default function MainHeader() {
             {navLinks.map((l) => {
               if (l.label === 'About Us') {
                 const submenu = [
-                  { href: '/about-us', label: 'About Us' },
+                  // { href: '/about-us', label: 'About Us' },
                   { href: '/cloth-design', label: 'View Design' },
                   { href: '/gallery', label: 'Gallery' },
                   // { href: '/careers', label: 'Careers' }
@@ -243,7 +243,7 @@ export default function MainHeader() {
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
               <Link href="/" className="flex items-center gap-3">
-                <Image src="/images/rayob.svg" alt="Rayob Logo" width={100} height={50} className="w-40 block rounded-md" />
+                <Image src="/images/morad.png" alt="LASU MBA" width={100} height={50} className="w-40 block rounded-md" />
               </Link>
               <button onClick={() => setOpen(false)} className="text-red-600 text-2xl font-semibold">✕</button>
             </div>
@@ -252,10 +252,10 @@ export default function MainHeader() {
               {navLinks.map((l) => {
                 if (l.label === 'About Us') {
                   const submenu = [
-                    { href: '/about-us', label: 'About Us' },
+                    // { href: '/about-us', label: 'About Us' },
                     { href: '/projects', label: 'Projects' },
                     { href: '/gallery', label: 'Gallery' },
-                    { href: '/careers', label: 'Careers' },
+                    // { href: '/careers', label: 'Careers' },
                   ]
 
                   return (

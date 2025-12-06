@@ -95,38 +95,40 @@ export default function ContactUsMain() {
             {/* Location / Map */}
             <div className="rounded-xl overflow-hidden shadow-md h-64 relative">
               <iframe
-                title="Rayob Engineering Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.1234567890!2d3.3792!3d6.5244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf0f1e4e92dff%3A0x123456789abcdef!2sIkeja%2C%20Lagos!5e0!3m2!1sen!2sng!4v1234567890"
+                title="Lasu MBA Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.435686909754!2d3.197725774480175!3d6.466360623825772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8696500590b1%3A0xf27b47e41fad6dab!2sLagos%20State%20University!5e0!3m2!1sen!2sng!4v1765030799524!5m2!1sen!2sng"
                 className="w-full h-full border-0"
                 allowFullScreen=""
                 loading="lazy"
               ></iframe>
+
+              {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.435686909754!2d3.197725774480175!3d6.466360623825772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8696500590b1%3A0xf27b47e41fad6dab!2sLagos%20State%20University!5e0!3m2!1sen!2sng!4v1765030799524!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
             </div>
 
             {/* Details */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <MapPin className="text-blue-900" />
-                <p>31/35 Ebute kekere way, Akesan Lagos.</p>
+                <p>Lagos State University, Ojo, Lagos, Nigeria</p>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="text-blue-900" />
-                <a href="tel:+2348000000000" className="hover:text-blue-900 transition">
-                  (+234) 08152260336,
+                <a href="tel:+2348060556493" className="hover:text-blue-900 transition">
+                  (+234) 08060556493,
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.014 8.00613C6.12827 7.1024 7.30277 5.87414 8.23488 6.01043L8.23339 6.00894C9.14051 6.18132 9.85859 7.74261 10.2635 8.44465C10.5504 8.95402 10.3641 9.4701 10.0965 9.68787C9.7355 9.97883 9.17099 10.3803 9.28943 10.7834C9.5 11.5 12 14 13.2296 14.7107C13.695 14.9797 14.0325 14.2702 14.3207 13.9067C14.5301 13.6271 15.0466 13.46 15.5548 13.736C16.3138 14.178 17.0288 14.6917 17.69 15.27C18.0202 15.546 18.0977 15.9539 17.8689 16.385C17.4659 17.1443 16.3003 18.1456 15.4542 17.9421C13.9764 17.5868 8 15.27 6.08033 8.55801C5.97237 8.24048 5.99955 8.12044 6.014 8.00613Z" fill="#1c398e"></path> <path fillRule="evenodd" clipRule="evenodd" d="M12 23C10.7764 23 10.0994 22.8687 9 22.5L6.89443 23.5528C5.56462 24.2177 4 23.2507 4 21.7639V19.5C1.84655 17.492 1 15.1767 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23ZM6 18.6303L5.36395 18.0372C3.69087 16.4772 3 14.7331 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C11.0143 21 10.552 20.911 9.63595 20.6038L8.84847 20.3397L6 21.7639V18.6303Z" fill="#1c398e"></path> </g></svg>
-                <a href="https://wa.me/08030960533" className="hover:text-blue-700 transition">
-                  (+234) 08030960533
+                <a href="https://wa.me/08060556493" className="hover:text-blue-700 transition">
+                  (+234) 08060556493
                 </a>
               </div>
-              <div className="flex items-center gap-3">
+              {/* <div className="flex items-center gap-3">
                 <Mail className="text-blue-900" />
                 <a href="mailto:info@rayobengineering.com" className="hover:text-blue-900 transition">
                   info@rayobengineering.com
                 </a>
-              </div>
+              </div> */}
               <div className="flex items-center gap-3">
                 <Clock className="text-blue-900" />
                 <p>Mon - Fri: 9:00 AM - 5:00 PM</p>

@@ -11,21 +11,21 @@ export default function Hero() {
       subtitle: 'Custom-designed academic and corporate uniforms that make every occasion memorable.',
       cta: { label: 'Order Custom Uniform', href: '/programs' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
-      image: { src: '/images/telecom2.jpeg', alt: 'Professional development' }
+      image: { src: '/images/projectplaceholder.png', alt: 'Professional development' }
     },
     {
       title: 'Order Bespoke LASU MBA Uniforms',
       subtitle: 'Showcase your LASU MBA pride with our exclusive custom uniforms, tailored for graduations and special events.',
       cta: { label: 'Order Custom Uniform', href: '/mentors' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
-      image: { src: '/images/telecom1.jpeg', alt: 'Expert mentorship' }
+      image: { src: '/images/projectplaceholder.png', alt: 'Expert mentorship' }
     },
     {
       title: 'Hurry Up! Limited Time Offer',
       subtitle: 'Elevate Your Style with LASU MBA Uniforms',
       cta: { label: 'Order Custom Uniform', href: '/enroll' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
-      image: { src: '/images/fibre1.jpeg', alt: 'Professional training' }
+      image: { src: '/images/projectplaceholder.png', alt: 'Professional training' }
     }
   ]
 
