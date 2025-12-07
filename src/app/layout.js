@@ -7,7 +7,7 @@ export const metadata = {
   title: 'Lasu Post Graduate Students\' Association',
   description: 'Empowering Postgraduate Students at Lagos State University',
   icons: {
-    icon: '/rayob1.jpg',
+    icon: '/morad.png',
     apple: '/apple-icon.png',
   },
 }
