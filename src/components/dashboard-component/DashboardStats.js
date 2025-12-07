@@ -154,12 +154,12 @@ export default function DashboardStats({ data = {} }) {
   };
 
   const items = [
-    { key: 'users', label: 'Active Users', value: displayStats.users, icon: 'users' },
+    { key: 'users', label: 'Active Students', value: displayStats.users, icon: 'users' },
+    { key: 'quotes', label: 'T-Shirt Requests', value: displayStats.quotes, icon: 'quotes' },
+    { key: 'requests', label: 'Pending Requests', value: displayStats.requests, icon: 'requests' },
     { key: 'blogs', label: 'Published Blogs', value: displayStats.blogs, icon: 'blogs' },
     { key: 'contacts', label: 'Contact Forms', value: displayStats.contacts, icon: 'contacts' },
-    { key: 'quotes', label: 'Quote Requests', value: displayStats.quotes, icon: 'quotes' },
-    { key: 'projects', label: 'Projects', value: displayStats.projects, icon: 'projects' },
-    { key: 'requests', label: 'Pending Requests', value: displayStats.requests, icon: 'requests' },
+    // { key: 'projects', label: 'Projects', value: displayStats.projects, icon: 'projects' },
   ];
 
   if (error && !stats) {

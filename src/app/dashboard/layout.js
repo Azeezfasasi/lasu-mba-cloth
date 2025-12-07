@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }) {
       <div className="min-h-screen bg-gray-50 overflow-x-hidden">
         <DashboardHeader onToggleSidebar={toggleSidebar} onToggleMobileMenu={toggleMobileMenu} />
 
-        <div className="flex">
+        <div className="flex w-full">
           <DashboardMenu collapsed={collapsed} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
           <main className="flex-1 p-6">{children}</main>

@@ -27,9 +27,9 @@ const AddCloth = () => {
   const [specs, setSpecs] = useState([
     { label: 'Fabric Type', value: '' },
     { label: 'Color', value: '' },
-    { label: 'Logo', value: '' },
-    { label: 'Care', value: '' },
-    { label: 'Fit', value: '' },
+    { label: 'Sleeve Length', value: '' },
+    { label: 'Print Method', value: '' },
+    { label: 'Washing Condition', value: '' },
   ])
 
   const [images, setImages] = useState([])
@@ -173,19 +173,19 @@ const AddCloth = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Add New Cloth Design</h1>
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-0 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto w-full">
+        <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Add New Cloth Design</h1>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            <div className="mb-6 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm sm:text-base">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
+            <div className="mb-6 p-3 sm:p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm sm:text-base">
               {success}
             </div>
           )}
@@ -193,10 +193,10 @@ const AddCloth = () => {
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Basic Information */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Basic Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Basic Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Cloth Name *
                   </label>
                   <input
@@ -205,13 +205,13 @@ const AddCloth = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="e.g., LASU MBA T-Shirt"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Price (₦) *
                   </label>
                   <input
@@ -222,13 +222,13 @@ const AddCloth = () => {
                     placeholder="25000"
                     step="0.01"
                     min="0"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Description *
                   </label>
                   <textarea
@@ -237,13 +237,13 @@ const AddCloth = () => {
                     onChange={handleInputChange}
                     placeholder="Describe the cloth design..."
                     rows="4"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Color *
                   </label>
                   <input
@@ -252,13 +252,13 @@ const AddCloth = () => {
                     value={formData.color}
                     onChange={handleInputChange}
                     placeholder="e.g., Navy Blue"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Material *
                   </label>
                   <input
@@ -267,13 +267,13 @@ const AddCloth = () => {
                     value={formData.material}
                     onChange={handleInputChange}
                     placeholder="e.g., 100% Cotton"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
               </div>
 
-              <div className="mt-4 flex gap-6">
+              <div className="mt-4 flex flex-col sm:flex-row gap-4 sm:gap-6">
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -282,18 +282,18 @@ const AddCloth = () => {
                     onChange={handleInputChange}
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Featured Cloth</span>
+                  <span className="ml-2 text-xs sm:text-sm text-gray-700">Featured Cloth</span>
                 </label>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="flex-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Status
                   </label>
                   <select
                     name="status"
                     value={formData.status}
                     onChange={handleInputChange}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
@@ -305,11 +305,11 @@ const AddCloth = () => {
 
             {/* Sizes and Stock */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Sizes & Stock</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Sizes & Stock</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
                 {sizes.map((size, index) => (
                   <div key={size.size}>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                       {size.size}
                     </label>
                     <input
@@ -318,7 +318,7 @@ const AddCloth = () => {
                       onChange={(e) => handleSizeChange(index, e.target.value)}
                       placeholder="Qty"
                       min="0"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-2 sm:px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 ))}
@@ -327,12 +327,12 @@ const AddCloth = () => {
 
             {/* Specifications */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Specifications</h2>
-              <div className="space-y-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Specifications</h2>
+              <div className="space-y-3 sm:space-y-4">
                 {specs.map((spec, index) => (
-                  <div key={spec.label} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div key={spec.label} className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                         {spec.label}
                       </label>
                     </div>
@@ -341,7 +341,7 @@ const AddCloth = () => {
                       value={spec.value}
                       onChange={(e) => handleSpecChange(index, 'value', e.target.value)}
                       placeholder={`Enter ${spec.label.toLowerCase()}`}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 ))}
@@ -350,14 +350,14 @@ const AddCloth = () => {
 
             {/* Images */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Images *</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Images *</h2>
 
               <div
-                className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition"
+                className="border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center cursor-pointer hover:border-blue-500 transition"
                 onClick={() => fileInputRef.current?.click()}
               >
-                <Upload className="mx-auto h-12 w-12 text-gray-400 mb-2" />
-                <p className="text-sm text-gray-600">
+                <Upload className="mx-auto h-10 sm:h-12 w-10 sm:w-12 text-gray-400 mb-2" />
+                <p className="text-xs sm:text-sm text-gray-600">
                   Click to upload images or drag and drop
                 </p>
                 <input
@@ -372,17 +372,17 @@ const AddCloth = () => {
               </div>
 
               {uploadingImages && (
-                <p className="text-center text-gray-600 mt-4">Uploading images...</p>
+                <p className="text-center text-gray-600 mt-4 text-sm">Uploading images...</p>
               )}
 
               {images.length > 0 && (
-                <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
                   {images.map((image, index) => (
                     <div key={index} className="relative group">
                       <img
                         src={image.url}
                         alt={`Cloth design ${index + 1}`}
-                        className="w-full h-32 object-cover rounded-lg"
+                        className="w-full h-28 sm:h-32 object-cover rounded-lg"
                       />
                       <button
                         type="button"
@@ -398,18 +398,18 @@ const AddCloth = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button
                 type="submit"
                 disabled={loading || uploadingImages}
-                className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                className="flex-1 bg-blue-600 text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
                 {loading ? 'Creating...' : 'Create Cloth Design'}
               </button>
               <button
                 type="button"
                 onClick={() => window.history.back()}
-                className="flex-1 bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-400 transition"
+                className="flex-1 bg-gray-300 text-gray-800 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-400 transition"
               >
                 Cancel
               </button>

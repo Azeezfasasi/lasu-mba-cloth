@@ -204,13 +204,6 @@ const ClothDesign360Viewer = () => {
           <p className="text-lg text-gray-600">Explore and customize your professional attire for MBA programs</p>
         </div>
 
-        {/* {cartSuccess && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 flex items-center gap-2">
-            <ShoppingCart size={20} />
-            Added to cart successfully!
-          </div>
-        )} */}
-
         <div className="grid lg:grid-cols-3 gap-8">
           {/* 360 Viewer */}
           <div className="lg:col-span-2">
@@ -224,7 +217,7 @@ const ClothDesign360Viewer = () => {
               >
                 <div className="relative w-full h-full flex items-center justify-center">
                   {/* Product Image Display */}
-                  <div className="relative w-80 h-96 bg-white rounded-lg shadow-md flex items-center justify-center overflow-hidden"
+                  <div className="relative w-full lg:w-1/2 h-96 bg-white rounded-lg shadow-md flex items-center justify-center overflow-hidden"
                     style={{
                       transform: `perspective(1000px) rotateY(${rotation}deg)`,
                       transformStyle: 'preserve-3d'

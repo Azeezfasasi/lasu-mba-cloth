@@ -247,7 +247,7 @@ const ManageQuoteRequests = () => {
 	return (
 		<div className="bg-gray-50 py-2 md:py-8 px-0 sm:px-6 lg:px-8 mx-auto">
 			<div className="w-[330px] md:w-full md:max-w-7xl mx-auto">
-				<h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Quote Requests</h1>
+				<h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">T-Shirt Requests</h1>
 				{/* Search and Filters */}
 				<div className="bg-white rounded-lg shadow-sm p-2 md:p-6 mb-6">
 					<div className="flex flex-col gap-4">
@@ -256,7 +256,7 @@ const ManageQuoteRequests = () => {
 							<Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
 							<input
 								type="text"
-								placeholder="Search by name, email, company, service, or message..."
+								placeholder="Search by name, email, department, size, or message..."
 								value={searchQuery}
 								onChange={handleSearch}
 								className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
@@ -360,10 +360,10 @@ const ManageQuoteRequests = () => {
 								<thead className="bg-gray-50 border-b border-gray-200">
 									<tr>
 										<th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-											Name & Company
+											Name & Department
 										</th>
 										<th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-											Service
+											Size
 										</th>
 										<th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
 											Status
@@ -487,7 +487,7 @@ const ManageQuoteRequests = () => {
 					<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
 						<div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-96 overflow-y-auto">
 							<div className="p-6 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white">
-								<h3 className="text-lg font-semibold text-gray-900">View Quote Request</h3>
+								<h3 className="text-lg font-semibold text-gray-900">View T-Shirt Request</h3>
 								<button
 									onClick={() => setShowViewModal(false)}
 									className="text-gray-500 hover:text-gray-700"
@@ -503,7 +503,7 @@ const ManageQuoteRequests = () => {
 										<p className="text-gray-900">{selectedRequest.name}</p>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+										<label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
 										<p className="text-gray-900">{selectedRequest.company}</p>
 									</div>
 									<div>
@@ -517,12 +517,12 @@ const ManageQuoteRequests = () => {
 								</div>
 
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Service</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Size</label>
 									<p className="text-gray-900">{selectedRequest.service}</p>
 								</div>
 
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-1">Project Details</label>
+									<label className="block text-sm font-medium text-gray-700 mb-1">Request Details</label>
 									<p className="text-gray-900 bg-gray-50 p-4 rounded-lg whitespace-pre-wrap">
 										{selectedRequest.message}
 									</p>
@@ -572,7 +572,7 @@ const ManageQuoteRequests = () => {
 					<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
 						<div className="bg-white rounded-lg shadow-lg max-w-2xl w-full">
 							<div className="p-6 border-b border-gray-200 flex justify-between items-center">
-								<h3 className="text-lg font-semibold text-gray-900">Reply to Quote Request</h3>
+								<h3 className="text-lg font-semibold text-gray-900">Reply to T-Shirt Request</h3>
 								<button
 									onClick={() => setShowReplyModal(false)}
 									className="text-gray-500 hover:text-gray-700"
@@ -584,7 +584,7 @@ const ManageQuoteRequests = () => {
 							<div className="p-6 space-y-4">
 								<div>
 									<label className="block text-sm font-medium text-gray-700 mb-2">From</label>
-									<p className="text-gray-900">admin@rayobengineering.com</p>
+									<p className="text-gray-900">info@lasumba.edu</p>
 								</div>
 
 								<div>
@@ -594,17 +594,17 @@ const ManageQuoteRequests = () => {
 
 								<div>
 									<label className="block text-sm font-medium text-gray-700 mb-2">Original Request</label>
-									<p className="text-gray-900 text-sm bg-gray-50 p-3 rounded">Service: {selectedRequest.service}</p>
+									<p className="text-gray-900 text-sm bg-gray-50 p-3 rounded"><strong>Size:</strong> {selectedRequest.service}</p>
 								</div>
 
 								<div>
-									<label className="block text-sm font-medium text-gray-700 mb-2">Your Response/Quote *</label>
+									<label className="block text-sm font-medium text-gray-700 mb-2">Your Response/Request *</label>
 									<textarea
 										value={replyText}
 										onChange={(e) => setReplyText(e.target.value)}
 										rows="6"
 										placeholder="Type your quote or response here. Include pricing, timeline, scope of work, etc."
-										className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none resize-none"
+										className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
 									/>
 									<p className="text-xs text-gray-500 mt-1">{replyText.length} characters</p>
 								</div>
@@ -622,7 +622,7 @@ const ManageQuoteRequests = () => {
 									className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium transition flex items-center gap-2"
 								>
 									<Reply className="w-4 h-4" />
-									Send Quote
+									Send Reply
 								</button>
 							</div>
 						</div>

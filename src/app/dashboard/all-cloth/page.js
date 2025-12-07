@@ -78,35 +78,35 @@ const AllClothes = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-50 py-6 lg:py-12 px-0 sm:px-0 lg:px-8">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Cloth Designs</h1>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Cloth Designs</h1>
           <Link
             href="/dashboard/add-cloth"
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            className="sm:w-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-10 lg:px-8 sm:px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm sm:text-base"
           >
-            <Plus size={20} />
+            <Plus size={18} />
             Add New Cloth
           </Link>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+          <div className="mb-6 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm sm:text-base">
             {error}
           </div>
         )}
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white rounded-lg shadow-md p-8 sm:p-6 mb-6 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mx-auto">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                 Search
               </label>
               <div className="relative">
-                <Search className="absolute left-3 top-3 text-gray-400" size={18} />
+                <Search className="absolute left-3 top-2.5 sm:top-3 text-gray-400" size={16} />
                 <input
                   type="text"
                   placeholder="Search cloths..."
@@ -115,13 +115,13 @@ const AllClothes = () => {
                     setSearchTerm(e.target.value)
                     setCurrentPage(1)
                   }}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                 Status
               </label>
               <select
@@ -130,7 +130,7 @@ const AllClothes = () => {
                   setStatusFilter(e.target.value)
                   setCurrentPage(1)
                 }}
-                className="px-4 py-2 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="">All Status</option>
                 <option value="active">Active</option>
@@ -140,7 +140,7 @@ const AllClothes = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                 Sort By
               </label>
               <select
@@ -149,7 +149,7 @@ const AllClothes = () => {
                   setSortBy(e.target.value)
                   setCurrentPage(1)
                 }}
-                className="px-4 py-2 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="-createdAt">Newest First</option>
                 <option value="createdAt">Oldest First</option>
@@ -160,7 +160,7 @@ const AllClothes = () => {
               </select>
             </div>
 
-            <div className="flex items-end">
+            <div className="sm:col-span-2 lg:col-span-1 flex items-end">
               <button
                 onClick={() => {
                   setSearchTerm('')
@@ -168,7 +168,7 @@ const AllClothes = () => {
                   setSortBy('-createdAt')
                   setCurrentPage(1)
                 }}
-                className="w-full px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
+                className="w-full px-3 sm:px-4 py-2 text-xs sm:text-sm bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
               >
                 Reset Filters
               </button>
@@ -186,58 +186,58 @@ const AllClothes = () => {
         {/* Cloths Table */}
         {!loading && cloths.length > 0 && (
           <div className="bg-white rounded-lg shadow-md overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-full">
               <thead className="bg-gray-100 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Image</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Name</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Price</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Color</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Stock</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Actions</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Image</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Name</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Price</th>
+                  <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Color</th>
+                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Stock</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Status</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {cloths.map((cloth) => (
-                  <tr key={cloth._id} className="hover:bg-gray-50 transition">
-                    <td className="px-6 py-4">
+                  <tr key={cloth._id} className="hover:bg-gray-50 transition text-xs sm:text-sm">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       {cloth.images && cloth.images.length > 0 && (
                         <img
                           src={cloth.images[0].url}
                           alt={cloth.name}
-                          className="h-12 w-12 object-cover rounded"
+                          className="h-10 sm:h-12 w-10 sm:w-12 object-cover rounded"
                         />
                       )}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <div>
-                        <p className="font-semibold text-gray-900">{cloth.name}</p>
-                        <p className="text-sm text-gray-600 truncate">{cloth.description}</p>
+                        <p className="font-semibold text-gray-900 text-xs sm:text-sm">{cloth.name}</p>
+                        <p className="text-xs text-gray-600 truncate hidden sm:block">{cloth.description}</p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-gray-900">₦{cloth.price.toLocaleString()}</td>
-                    <td className="px-6 py-4">
-                      <span className="inline-block w-6 h-6 rounded border-2 border-gray-300" style={{backgroundColor: cloth.color === 'Navy Blue' ? '#001f3f' : cloth.color === 'White' ? '#ffffff' : '#ccc'}} title={cloth.color} />
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900 font-medium">₦{cloth.price.toLocaleString()}</td>
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4">
+                      <span className="inline-block w-5 h-5 sm:w-6 sm:h-6 rounded border-2 border-gray-300" style={{backgroundColor: cloth.color === 'Navy Blue' ? '#001f3f' : cloth.color === 'White' ? '#ffffff' : '#ccc'}} title={cloth.color} />
                     </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${cloth.inStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                        {cloth.inStock ? 'In Stock' : 'Out of Stock'}
+                    <td className="hidden md:table-cell px-3 sm:px-6 py-3 sm:py-4">
+                      <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${cloth.inStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        {cloth.inStock ? 'In Stock' : 'Out'}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${cloth.status === 'active' ? 'bg-blue-100 text-blue-800' : cloth.status === 'inactive' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'}`}>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${cloth.status === 'active' ? 'bg-blue-100 text-blue-800' : cloth.status === 'inactive' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'}`}>
                         {cloth.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-3">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex gap-2 sm:gap-3">
                         <Link
                           href={`/cloth-design?id=${cloth._id}`}
                           target="_blank"
                           className="text-blue-600 hover:text-blue-800 transition"
                         >
-                          <Eye size={18} />
+                          <Eye size={16} className="sm:w-5 sm:h-5" />
                         </Link>
                         <button
                           onClick={() => {
@@ -246,14 +246,14 @@ const AllClothes = () => {
                           }}
                           className="text-green-600 hover:text-green-800 transition"
                         >
-                          <Edit2 size={18} />
+                          <Edit2 size={16} className="sm:w-5 sm:h-5" />
                         </button>
                         <button
                           onClick={() => handleDelete(cloth._id)}
                           disabled={deletingId === cloth._id}
                           className="text-red-600 hover:text-red-800 transition disabled:opacity-50"
                         >
-                          <Trash2 size={18} />
+                          <Trash2 size={16} className="sm:w-5 sm:h-5" />
                         </button>
                       </div>
                     </td>
@@ -266,11 +266,11 @@ const AllClothes = () => {
 
         {/* No Results */}
         {!loading && cloths.length === 0 && (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 text-lg">No cloths found</p>
+          <div className="bg-white rounded-lg shadow-md p-6 sm:p-12 text-center">
+            <p className="text-gray-600 text-base sm:text-lg">No cloths found</p>
             <Link
               href="/dashboard/add-cloth"
-              className="inline-block mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+              className="inline-block mt-4 bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-700 transition text-sm sm:text-base"
             >
               Create First Cloth
             </Link>
@@ -279,26 +279,26 @@ const AllClothes = () => {
 
         {/* Pagination */}
         {!loading && totalPages > 1 && (
-          <div className="mt-8 flex justify-between items-center">
-            <div className="text-sm text-gray-600">
+          <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+            <div className="text-xs sm:text-sm text-gray-600">
               Page {currentPage} of {totalPages}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
               >
-                <ChevronLeft size={18} />
-                Previous
+                <ChevronLeft size={16} />
+                <span className="hidden sm:inline">Previous</span>
               </button>
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
               >
-                Next
-                <ChevronRight size={18} />
+                <span className="hidden sm:inline">Next</span>
+                <ChevronRight size={16} />
               </button>
             </div>
           </div>
@@ -361,27 +361,27 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-96 overflow-y-auto">
-        <div className="sticky top-0 flex justify-between items-center p-6 border-b border-gray-200 bg-white">
-          <h2 className="text-2xl font-bold">Edit Cloth</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4">
+      <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 flex justify-between items-center p-4 sm:p-6 border-b border-gray-200 bg-white">
+          <h2 className="text-xl sm:text-2xl font-bold">Edit Cloth</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl"
           >
             ✕
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleInputChange}
               placeholder="Name"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="number"
@@ -390,7 +390,7 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
               onChange={handleInputChange}
               placeholder="Price"
               step="0.01"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -400,17 +400,17 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
             onChange={handleInputChange}
             placeholder="Description"
             rows="3"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               name="color"
               value={formData.color}
               onChange={handleInputChange}
               placeholder="Color"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="text"
@@ -418,26 +418,26 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
               value={formData.material}
               onChange={handleInputChange}
               placeholder="Material"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
             {sizes.map((size, index) => (
               <div key={size.size}>
-                <label className="text-sm font-medium text-gray-700">{size.size}</label>
+                <label className="text-xs sm:text-sm font-medium text-gray-700">{size.size}</label>
                 <input
                   type="number"
                   value={size.quantity}
                   onChange={(e) => handleSizeChange(index, e.target.value)}
                   min="0"
-                  className="w-full px-3 py-1 border border-gray-300 rounded text-sm"
+                  className="w-full px-2 sm:px-3 py-1 text-xs sm:text-sm border border-gray-300 rounded"
                 />
               </div>
             ))}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <label className="flex items-center">
               <input
                 type="checkbox"
@@ -446,14 +446,14 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
                 onChange={handleInputChange}
                 className="h-4 w-4 text-blue-600"
               />
-              <span className="ml-2 text-sm text-gray-700">Featured</span>
+              <span className="ml-2 text-xs sm:text-sm text-gray-700">Featured</span>
             </label>
 
             <select
               name="status"
               value={formData.status}
               onChange={handleInputChange}
-              className="px-3 py-1 border border-gray-300 rounded text-sm"
+              className="px-3 py-1 text-xs sm:text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -461,18 +461,18 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
             </select>
           </div>
 
-          <div className="flex gap-4 pt-4 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-gray-200">
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+              className="flex-1 bg-blue-600 text-white py-2 text-sm sm:text-base rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
             >
               {loading ? 'Updating...' : 'Update Cloth'}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-gray-300 text-gray-800 py-2 rounded-lg hover:bg-gray-400 font-medium"
+              className="flex-1 bg-gray-300 text-gray-800 py-2 text-sm sm:text-base rounded-lg hover:bg-gray-400 font-medium"
             >
               Cancel
             </button>
