@@ -55,15 +55,15 @@ export default function DashboardMenu({ collapsed, mobileOpen = false, onClose =
   const items = [
     { href: '/dashboard', label: 'Dashboard', icon: 'dashboard', roles: ['admin', 'client', 'staff-member'] },
     { href: '/request-a-quote', label: 'Cloth Requests', icon: 'dashboard', roles: ['client'] },
-    { href: '/dashboard/quote-requests', label: 'All Cloth Requests', icon: 'Quote Requests', roles: ['admin', 'staff-member'] },
+    { href: '/dashboard/quote-requests', label: 'All T-Shirt Requests', icon: 'Quote Requests', roles: ['admin', 'staff-member'] },
     {
       href: '/dashboard/add-cloth',
-      label: 'Manage Cloths Details',
+      label: 'Manage T-Shirt Details',
       icon: 'projects',
       roles: ['admin', 'staff-member'],
       children: [
-        { href: '/dashboard/add-cloth', label: 'Add Cloth Details', roles: ['admin', 'staff-member'] },
-        { href: '/dashboard/all-cloth', label: 'All Cloth Details', roles: ['admin', 'staff-member'] }
+        { href: '/dashboard/add-cloth', label: 'Add T-Shirt Details', roles: ['admin', 'staff-member'] },
+        { href: '/dashboard/all-cloth', label: 'All T-Shirt Details', roles: ['admin', 'staff-member'] }
       ]
     },
     // { href: '/projects', label: 'Completed Projects', icon: 'projects', roles: ['client'] },

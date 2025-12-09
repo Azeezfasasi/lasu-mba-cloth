@@ -12,7 +12,7 @@ export default function CallToAction() {
             </h2>
 
             <p className="text-blue-100 mb-8">
-              Customize your celebration wear with bespoke LASU postgraduate uniforms and branded apparel.
+              Customize your celebration wear with bespoke LASU postgraduate T-Shirt and branded apparel.
               Perfect for convocations, events, and networking occasions. Make a lasting impression!
             </p>
 
@@ -22,13 +22,13 @@ export default function CallToAction() {
                 href="/custom-uniforms"
                 className="bg-white text-blue-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-gray-100 transition text-center"
               >
-                Order Custom Uniforms
+                Order Custom T-Shirt
               </a>
               <a
                 href="/gallery"
                 className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-blue-900 transition text-center"
               >
-                View Designs
+                View T-Shirt Designs
               </a>
             </div>
           </div>

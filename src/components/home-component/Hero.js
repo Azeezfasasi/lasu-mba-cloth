@@ -9,21 +9,21 @@ export default function Hero() {
     {
       title: 'Celebrate Your Achievements in Style',
       subtitle: 'Custom-designed academic and corporate uniforms that make every occasion memorable.',
-      cta: { label: 'Order Custom Uniform', href: '/programs' },
+      cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/projectplaceholder.png', alt: 'Professional development' }
     },
     {
-      title: 'Order Bespoke LASU MBA Uniforms',
-      subtitle: 'Showcase your LASU MBA pride with our exclusive custom uniforms, tailored for graduations and special events.',
-      cta: { label: 'Order Custom Uniform', href: '/mentors' },
+      title: 'Order Bespoke LASU MBA T-Shirt',
+      subtitle: 'Showcase your LASU MBA pride with our exclusive custom T-Shirt, tailored for graduations and special events.',
+      cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/projectplaceholder.png', alt: 'Expert mentorship' }
     },
     {
       title: 'Hurry Up! Limited Time Offer',
-      subtitle: 'Elevate Your Style with LASU MBA Uniforms',
-      cta: { label: 'Order Custom Uniform', href: '/enroll' },
+      subtitle: 'Elevate Your Style with LASU MBA T-Shirts',
+      cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/projectplaceholder.png', alt: 'Professional training' }
     }

@@ -34,7 +34,7 @@ export default function HomeAbout() {
             href="/cloth-design"
             className="inline-block bg-blue-900 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 transition"
           >
-            Order Custom Uniforms
+            Order Custom T-Shirts Now
           </a>
         </div>
 

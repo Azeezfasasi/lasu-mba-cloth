@@ -37,7 +37,7 @@ export default function MainHeader() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about-us', label: 'About Us' },
-    { href: '/request-a-quote', label: 'Order Uniform' },
+    { href: '/request-a-quote', label: 'Order T-Shirt' },
     { href: '/blog', label: 'Blog' },
     { href: '/contact-us', label: 'Contact Us' }
   ]
@@ -106,7 +106,7 @@ export default function MainHeader() {
               if (l.label === 'About Us') {
                 const submenu = [
                   // { href: '/about-us', label: 'About Us' },
-                  { href: '/cloth-design', label: 'View Design' },
+                  { href: '/cloth-design', label: 'View T-Shirt Design' },
                   { href: '/gallery', label: 'Gallery' },
                   // { href: '/careers', label: 'Careers' }
                 ]
@@ -192,7 +192,7 @@ export default function MainHeader() {
                     </Link>
                     {user?.role === 'admin' || user?.role === 'staff-member' ? (
                     <Link href="/dashboard/quote-requests" className="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-300">
-                     Manage Shirt Requests
+                     Manage T-Shirt Requests
                     </Link>
                     ) : null}
                     <Link href="/dashboard/my-profile" className="block px-4 py-2 font-medium text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-300">
@@ -253,7 +253,7 @@ export default function MainHeader() {
                 if (l.label === 'About Us') {
                   const submenu = [
                     // { href: '/about-us', label: 'About Us' },
-                    { href: '/projects', label: 'Projects' },
+                    { href: '/cloth-design', label: 'View T-Shirt Design' },
                     { href: '/gallery', label: 'Gallery' },
                     // { href: '/careers', label: 'Careers' },
                   ]

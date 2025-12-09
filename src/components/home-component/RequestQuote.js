@@ -57,10 +57,10 @@ export default function RequestQuote() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-            Order Your Customized Clothing Today!
+            Order Your Customized T-Shirt Today!
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Fill out the form below to request a uniform. Our committee will get in touch with you shortly.
+            Fill out the form below to request your T-Shirt. Our committee will get in touch with you shortly.
           </p>
         </div>
 
@@ -132,11 +132,12 @@ export default function RequestQuote() {
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"
               >
                 <option value="">-- Choose a Size --</option>
+                <option value="Extra Small">Extra Small</option>
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
                 <option value="Extra Large">Extra Large</option>
-                <option value="Others">Others</option>
+                <option value="Double Extra Large">Double Extra Large</option>
               </select>
             </div>
 

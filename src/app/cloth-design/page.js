@@ -188,7 +188,7 @@ const ClothDesign360Viewer = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
-          <p className="text-gray-600 text-lg mb-4">No cloth designs available</p>
+          <p className="text-gray-600 text-lg mb-4">No T-Shirt designs available</p>
           <p className="text-gray-500 text-sm">Please check back later or contact support</p>
         </div>
       </div>
@@ -200,8 +200,8 @@ const ClothDesign360Viewer = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">LASU MBA Official Wear</h1>
-          <p className="text-lg text-gray-600">Explore and customize your professional attire for MBA programs</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">LASU MBA Official T-Shirt</h1>
+          <p className="text-lg text-gray-600">Explore and customize your professional T-Shirt for MBA programs</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -374,7 +374,7 @@ const ClothDesign360Viewer = () => {
             {/* View Details Link */}
             <div className='w-full border flex items-center justify-center itmems-center'>
                 <Link href="/request-a-quote" className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-md mb-4">
-                    <ShoppingCart size={20} /> Order Custom Design
+                    <ShoppingCart size={20} /> Order Your T-Shirt
                 </Link>
             </div>
 
