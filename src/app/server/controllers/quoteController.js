@@ -2,6 +2,12 @@ import Quote from "../models/Quote";
 import { connectDB } from "../db/connect";
 import User from "../models/User";
 import { NextResponse } from "next/server";
+import {
+  sendQuoteRequestConfirmation,
+  sendQuoteStatusUpdate,
+  sendQuoteReplyNotification,
+  sendAdminQuoteNotification,
+} from "../services/emailService";
 
 // 1. Create quote request
 export const createQuote = async (req) => {
@@ -10,6 +16,27 @@ export const createQuote = async (req) => {
     const body = await req.json();
     const quote = new Quote({ ...body });
     await quote.save();
+
+    // Send confirmation email to customer
+    try {
+      if (quote.customerEmail && quote.customerName) {
+        await sendQuoteRequestConfirmation(
+          quote.customerEmail,
+          quote.customerName,
+          quote._id.toString()
+        );
+      }
+    } catch (emailError) {
+      console.log("Failed to send customer confirmation email:", emailError.message);
+    }
+
+    // Send notification email to admin
+    try {
+      await sendAdminQuoteNotification(quote);
+    } catch (emailError) {
+      console.log("Failed to send admin notification email:", emailError.message);
+    }
+
     return NextResponse.json({ success: true, quote }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
@@ -60,8 +87,26 @@ export const changeQuoteStatus = async (req, quoteId) => {
     const { status } = body;
     const quote = await Quote.findById(quoteId);
     if (!quote) return NextResponse.json({ success: false, message: "Quote not found" }, { status: 404 });
+    
+    const oldStatus = quote.status;
     quote.status = status;
     await quote.save();
+
+    // Send status update email to customer
+    try {
+      if (quote.customerEmail && quote.customerName) {
+        await sendQuoteStatusUpdate(
+          quote.customerEmail,
+          quote.customerName,
+          quoteId,
+          status,
+          body.details || ""
+        );
+      }
+    } catch (emailError) {
+      console.log("Failed to send status update email:", emailError.message);
+    }
+
     return NextResponse.json({ success: true, quote }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
@@ -87,6 +132,21 @@ export const replyToQuote = async (req, quoteId) => {
     quote.replies.push({ sender: senderId, senderName: sender.firstName + ' ' + sender.lastName, message });
     quote.status = "replied";
     await quote.save();
+
+    // Send reply notification email to customer
+    try {
+      if (quote.customerEmail && quote.customerName) {
+        await sendQuoteReplyNotification(
+          quote.customerEmail,
+          quote.customerName,
+          quoteId,
+          message
+        );
+      }
+    } catch (emailError) {
+      console.log("Failed to send reply notification email:", emailError.message);
+    }
+
     return NextResponse.json({ success: true, quote }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });

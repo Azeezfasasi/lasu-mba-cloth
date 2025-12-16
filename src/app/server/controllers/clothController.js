@@ -1,4 +1,5 @@
 import Cloth from '../models/Cloth.js';
+import User from '../models/User.js';
 import {
   uploadToCloudinary,
   deleteFromCloudinary,

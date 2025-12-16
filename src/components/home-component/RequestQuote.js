@@ -8,6 +8,8 @@ export default function RequestQuote() {
     phone: "",
     company: "",
     service: "",
+    designType: "",
+    nickname: "",
     message: "",
   });
 
@@ -39,6 +41,8 @@ export default function RequestQuote() {
           phone: "",
           company: "",
           service: "",
+          designType: "",
+          nickname: "",
           message: "",
         });
       } else {
@@ -116,7 +120,37 @@ export default function RequestQuote() {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Rayob Client Ltd."
+                placeholder="Your Department"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-900"
+              />
+            </div>
+
+            {/* Design Type */}
+            <div className="">
+              <label className="block text-gray-700 font-medium mb-2">Preferred Design Type</label>
+              <select
+                name="designType"
+                value={formData.designType}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"
+              >
+                <option value="">-- Choose design type --</option>
+                <option value="White LASUMBA T-Shirt">White LASUMBA T-Shirt</option>
+                <option value="Blue LASUMBA T-Shirt">Blue LASUMBA T-Shirt</option>
+                <option value="Black LASUMBA T-Shirt">Black LASUMBA T-Shirt</option>
+              </select>
+            </div>
+
+            {/* Nickname */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Nickname</label>
+              <input
+                type="text"
+                name="nickname"
+                value={formData.nickname}
+                onChange={handleChange}
+                placeholder="Enter your nickname"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-900"
               />
             </div>
@@ -143,7 +177,7 @@ export default function RequestQuote() {
 
             {/* Message */}
             <div className="md:col-span-2">
-              <label className="block text-gray-700 font-medium mb-2">Other Details <span className="text-14px text-blue-500">(Specify the name to be Customize on the cloth)</span></label>
+              <label className="block text-gray-700 font-medium mb-2">Other Details <span className="text-14px text-blue-500">(Specify any other details the committee should know)</span></label>
               <textarea
                 name="message"
                 value={formData.message}

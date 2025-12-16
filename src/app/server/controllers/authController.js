@@ -3,22 +3,11 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import User from "../models/User.js";
 import { connectDB } from "../db/connect.js";
-import nodemailer from "nodemailer";
+import { sendVerificationEmail, sendPasswordResetEmail } from "../services/emailService.js";
 
 // JWT Secret
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 const JWT_EXPIRE = process.env.JWT_EXPIRE || "7d";
-
-// Email configuration
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: process.env.SMTP_SECURE === "true",
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
 
 // Generate JWT Token
 const generateToken = (userId) => {
@@ -76,14 +65,7 @@ export const register = async (req) => {
     const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
 
     try {
-      await transporter.sendMail({
-        to: email,
-        subject: "Email Verification - Rayob Engineering",
-        html: `<h2>Welcome to Rayob Engineering</h2>
-               <p>Please click the link below to verify your email:</p>
-               <a href="${verificationLink}">Verify Email</a>
-               <p>This link expires in 24 hours.</p>`,
-      });
+      await sendVerificationEmail(email, user.firstName, verificationLink);
     } catch (mailError) {
       console.log("Email sending failed, but user created:", mailError.message);
     }
@@ -379,14 +361,7 @@ export const forgotPassword = async (req) => {
     const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
 
     try {
-      await transporter.sendMail({
-        to: email,
-        subject: "Password Reset - Rayob Engineering",
-        html: `<h2>Password Reset Request</h2>
-               <p>Click the link below to reset your password:</p>
-               <a href="${resetLink}">Reset Password</a>
-               <p>This link expires in 30 minutes.</p>`,
-      });
+      await sendPasswordResetEmail(email, user.firstName, resetLink);
     } catch (mailError) {
       console.log("Email sending failed:", mailError.message);
     }

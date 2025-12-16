@@ -21,6 +21,8 @@ const quoteSchema = new mongoose.Schema({
   company: String,
   service: String,
   message: String,
+  designType: String,
+  nickname: String,
   status: {
     type: String,
     enum: ["pending", "in-progress", "completed", "replied", "closed"],
