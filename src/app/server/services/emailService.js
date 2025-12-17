@@ -44,7 +44,7 @@ export const sendVerificationEmail = async (email, firstName, verificationLink) 
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .header { background-color: #4CAF50; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .header { background-color: #0000FF; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
         .content { padding: 20px; }
         .button { display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
         .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
@@ -90,7 +90,7 @@ export const sendPasswordResetEmail = async (email, firstName, resetLink) => {
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .header { background-color: #FF9800; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .header { background-color: #0000FF; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
         .content { padding: 20px; }
         .button { display: inline-block; background-color: #FF9800; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
         .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
@@ -220,13 +220,13 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
 /**
  * Send quote status update email to customer
  */
-export const sendQuoteStatusUpdate = async (customerEmail, customerName, quoteId, status, details = "") => {
+export const sendQuoteStatusUpdate = async (quoteData) => {
   const statusMessages = {
-    pending: "Your quote is being prepared",
-    replied: "We have a response to your quote request",
-    approved: "Your quote has been approved",
-    rejected: "Unfortunately, we cannot process this quote at this time",
-    expired: "Your quote request has expired",
+    pending: "Your T-shirt is being prepared",
+    replied: "We have a response to your T-shirt request",
+    approved: "Your T-shirt request has been approved",
+    rejected: "Unfortunately, we cannot process this T-shirt quote at this time",
+    expired: "Your T-shirt request has expired",
   };
 
   const statusColors = {
@@ -237,8 +237,8 @@ export const sendQuoteStatusUpdate = async (customerEmail, customerName, quoteId
     expired: "#9E9E9E",
   };
 
-  const statusColor = statusColors[status] || "#2196F3";
-  const statusMessage = statusMessages[status] || "Your quote status has been updated";
+  const statusColor = statusColors[quoteData.status] || "#2196F3";
+  const statusMessage = statusMessages[quoteData.status] || "Your T-shirt request status has been updated";
 
   const html = `
     <!DOCTYPE html>
@@ -260,11 +260,11 @@ export const sendQuoteStatusUpdate = async (customerEmail, customerName, quoteId
           <h2>Quote Status Update</h2>
         </div>
         <div class="content">
-          <p>Hello ${customerName},</p>
+          <p>Hello ${quoteData.name},</p>
           <p>${statusMessage}</p>
-          <p><span class="status-badge">${status.toUpperCase()}</span></p>
-          <p><strong>Quote Reference ID:</strong> ${quoteId}</p>
-          ${details ? `<div class="details"><p>${details}</p></div>` : ""}
+          <p><span class="status-badge">${quoteData.status.toUpperCase()}</span></p>
+          <p><strong>Quote Reference ID:</strong> ${quoteData._id}</p>
+          ${quoteData.details ? `<div class="details"><p>${quoteData.details}</p></div>` : ""}
           <p>Thank you for choosing LASUMBA Games!</p>
           <p>Best regards,<br>LASUMBA Games Committee</p>
         </div>
@@ -277,8 +277,8 @@ export const sendQuoteStatusUpdate = async (customerEmail, customerName, quoteId
   `;
 
   return sendEmail({
-    to: customerEmail,
-    subject: `Quote Status Update: ${status.toUpperCase()} - Reference ID: ${quoteId}`,
+    to: quoteData.email,
+    subject: `T-shirt Status Update: ${quoteData.status.toUpperCase()} - Reference ID: ${quoteData._id}`,
     html,
   });
 };
@@ -286,7 +286,7 @@ export const sendQuoteStatusUpdate = async (customerEmail, customerName, quoteId
 /**
  * Send quote reply notification to customer
  */
-export const sendQuoteReplyNotification = async (customerEmail, customerName, quoteId, replyMessage) => {
+export const sendQuoteReplyNotification = async (quoteData) => {
   const html = `
     <!DOCTYPE html>
     <html>
@@ -294,7 +294,7 @@ export const sendQuoteReplyNotification = async (customerEmail, customerName, qu
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .header { background-color: #2196F3; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .header { background-color: #0000FF; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
         .content { padding: 20px; }
         .message-box { background-color: #f0f0f0; padding: 15px; border-left: 4px solid #2196F3; margin: 15px 0; border-radius: 5px; }
         .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
@@ -306,11 +306,11 @@ export const sendQuoteReplyNotification = async (customerEmail, customerName, qu
           <h2>New Reply to Your Quote</h2>
         </div>
         <div class="content">
-          <p>Hello ${customerName},</p>
+          <p>Hello ${quoteData.name},</p>
           <p>We have a response to your quote request!</p>
-          <p><strong>Quote Reference ID:</strong> ${quoteId}</p>
+          <p><strong>Quote Reference ID:</strong> ${quoteData._id}</p>
           <div class="message-box">
-            <p>${replyMessage}</p>
+            <p>${quoteData.replyMessage}</p>
           </div>
           <p>Please review the details above and let us know if you have any questions.</p>
           <p>Best regards,<br>LASUMBA Games Committee</p>
@@ -324,8 +324,8 @@ export const sendQuoteReplyNotification = async (customerEmail, customerName, qu
   `;
 
   return sendEmail({
-    to: customerEmail,
-    subject: `New Reply to Your Quote - Reference ID: ${quoteId}`,
+    to: quoteData.email,
+    subject: `New Reply to Your T-shirt - Reference ID: ${quoteData._id}`,
     html,
   });
 };
