@@ -193,12 +193,12 @@ export const assignQuote = async (req, quoteId) => {
               </div>
               <div class="content">
                 <p>Hello ${quote.name},</p>
-                <p>Your T-shirt request has been assigned to a staff member for processing.</p>
+                <p>Your T-shirt request has been assigned to a committee member for processing.</p>
                 <div class="details">
                   <p><strong>Assigned To:</strong> ${assignedUser.firstName} ${assignedUser.lastName}</p>
                   <p><strong>Quote Reference ID:</strong> ${quote._id}</p>
                 </div>
-                <p>Your assigned staff member will review your request and contact you soon with further details.</p>
+                <p>Your assigned committee member will review your request and contact you soon with further details.</p>
                 <p>Thank you for your patience!</p>
                 <p>Best regards,<br>LASUMBA Games Committee</p>
               </div>
