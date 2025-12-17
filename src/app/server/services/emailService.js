@@ -126,7 +126,7 @@ export const sendPasswordResetEmail = async (email, firstName, resetLink) => {
 };
 
 /**
- * Send quote request confirmation email to customer
+ * Send quote request confirmation email to students
  */
 export const sendQuoteRequestConfirmation = async (quoteData) => {
   const html = `
@@ -202,8 +202,8 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
   `;
 
   return sendEmail({
-    to: customerEmail,
-    subject: `Quote Request Received - Reference ID: ${quoteId}`,
+    to: quoteData.email,
+    subject: `Quote Request Received - Reference ID: ${quoteData._id}`,
     html,
   });
 };
@@ -338,7 +338,7 @@ export const sendAdminQuoteNotification = async (quoteData) => {
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 700px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .header { background-color: #F44336; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .header { background-color: #0000FF; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
         .content { padding: 20px; }
         .details-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
         .details-table td { padding: 10px; border-bottom: 1px solid #ddd; }

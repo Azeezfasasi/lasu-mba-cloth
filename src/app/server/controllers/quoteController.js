@@ -20,11 +20,7 @@ export const createQuote = async (req) => {
     // Send confirmation email to customer
     try {
       if (quote.email && quote.name) {
-        await sendQuoteRequestConfirmation(
-          quote.email,
-          quote.name,
-          quote._id.toString()
-        );
+        await sendQuoteRequestConfirmation(quote);
       }
     } catch (emailError) {
       console.log("Failed to send customer confirmation email:", emailError.message);
