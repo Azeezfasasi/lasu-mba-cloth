@@ -200,7 +200,7 @@ const ClothDesign360Viewer = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">LASU MBA Official T-Shirt</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">LASUMBA Games T-Shirt</h1>
           <p className="text-lg text-gray-600">Explore and customize your professional T-Shirt for MBA programs</p>
         </div>
 

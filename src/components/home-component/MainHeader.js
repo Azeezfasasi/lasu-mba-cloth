@@ -37,6 +37,8 @@ export default function MainHeader() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about-us', label: 'About Us' },
+    { href: '/cloth-design', label: 'View T-Shirt Design' },
+    { href: '/gallery', label: 'Gallery' },
     { href: '/request-a-quote', label: 'Order T-Shirt' },
     { href: '/blog', label: 'Blog' },
     { href: '/contact-us', label: 'Contact Us' }

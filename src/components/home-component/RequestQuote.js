@@ -101,7 +101,7 @@ export default function RequestQuote() {
 
             {/* Phone */}
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Phone Number</label>
+              <label className="block text-gray-700 font-medium mb-2">Phone Number <span className="text-blue-500">(WhatsApp preffered)</span></label>
               <input
                 type="text"
                 name="phone"
