@@ -14,13 +14,8 @@ export default function HomePage() {
     <>
       <Hero />
       <HomeAbout />
-      {/* <OurServices /> */}
-      {/* <FeaturedProjects /> */}
-      {/* <ClientsLogoSlider /> */}
       <CallToAction />
       <RequestQuote />
-      {/* <TestimonialsSection /> */}
-      {/* <SubscribeToNewsletter /> */}
     </>
   )
 }

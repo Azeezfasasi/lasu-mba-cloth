@@ -105,7 +105,7 @@ export default function MainHeader() {
             {navLinks.map((l) => {
               if (l.label === 'About LASUMBA Games') {
                 const submenu = [
-                  { href: '', label: 'About LASUMBA Games' },
+                  { href: '/about-us', label: 'About LASUMBA Games' },
                   { href: '/cloth-design', label: 'View T-Shirt Design' },
                   { href: '/gallery', label: 'Gallery' },
                 ]
@@ -251,10 +251,9 @@ export default function MainHeader() {
               {navLinks.map((l) => {
                 if (l.label === 'About Us') {
                   const submenu = [
-                    // { href: '/about-us', label: 'About Us' },
+                    { href: '/about-us', label: 'About Us' },
                     { href: '/cloth-design', label: 'View T-Shirt Design' },
                     { href: '/gallery', label: 'Gallery' },
-                    // { href: '/careers', label: 'Careers' },
                   ]
 
                   return (

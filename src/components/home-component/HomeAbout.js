@@ -39,10 +39,10 @@ export default function HomeAbout() {
           </p>
 
           <a
-            href="/cloth-design"
+            href="/about-us"
             className="inline-block bg-blue-900 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 transition"
           >
-            Order Custom T-Shirts Now
+            Read More About LASUMBA Games
           </a>
         </div>
 
