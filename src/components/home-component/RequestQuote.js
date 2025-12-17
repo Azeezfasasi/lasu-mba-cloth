@@ -107,7 +107,7 @@ export default function RequestQuote() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+234 800 000 0000"
+                placeholder="0800 000 0000"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-900"
               />
             </div>
