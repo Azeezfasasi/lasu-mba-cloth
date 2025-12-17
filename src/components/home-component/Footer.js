@@ -53,7 +53,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="" className="hover:text-white transition">
-                About Us
+                About LASUMBA Games
               </Link>
             </li>
             <li>

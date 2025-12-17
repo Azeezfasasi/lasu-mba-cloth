@@ -36,9 +36,7 @@ export default function MainHeader() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about-us', label: 'About Us' },
-    { href: '/cloth-design', label: 'View T-Shirt Design' },
-    { href: '/gallery', label: 'Gallery' },
+    { href: '/about-us', label: 'About LASUMBA Games' },
     { href: '/request-a-quote', label: 'Order T-Shirt' },
     { href: '/blog', label: 'Blog' },
     { href: '/contact-us', label: 'Contact Us' }
@@ -105,12 +103,11 @@ export default function MainHeader() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex lg:items-center lg:space-x-6" ref={aboutRef}>
             {navLinks.map((l) => {
-              if (l.label === 'About Us') {
+              if (l.label === 'About LASUMBA Games') {
                 const submenu = [
-                  // { href: '/about-us', label: 'About Us' },
+                  { href: '', label: 'About LASUMBA Games' },
                   { href: '/cloth-design', label: 'View T-Shirt Design' },
                   { href: '/gallery', label: 'Gallery' },
-                  // { href: '/careers', label: 'Careers' }
                 ]
 
                 return (
