@@ -130,7 +130,7 @@ export default function RequestQuote() {
 
             {/* Design Type */}
             <div className="">
-              <label className="block text-gray-700 font-medium mb-2">Preferred Design Type</label>
+              <label className="block text-gray-700 font-medium mb-2">Preferred Design Color</label>
               <select
                 name="designType"
                 value={formData.designType}

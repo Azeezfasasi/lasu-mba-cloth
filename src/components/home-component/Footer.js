@@ -52,13 +52,13 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/about-us" className="hover:text-white transition">
+              <Link href="" className="hover:text-white transition">
                 About Us
               </Link>
             </li>
             <li>
               <Link href="/request-a-quote" className="hover:text-white transition">
-                Order Uniforms
+                Order T-Shirts
               </Link>
             </li>
             <li>
