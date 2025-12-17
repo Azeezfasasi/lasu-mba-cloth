@@ -8,6 +8,7 @@ export default function RequestQuote() {
     phone: "",
     company: "",
     service: "",
+    level: "",
     designType: "",
     nickname: "",
     message: "",
@@ -41,6 +42,7 @@ export default function RequestQuote() {
           phone: "",
           company: "",
           service: "",
+          level: "",
           designType: "",
           nickname: "",
           message: "",
@@ -112,12 +114,12 @@ export default function RequestQuote() {
               />
             </div>
 
-            {/* Company */}
+            {/* Level */}
             <div>
               <label className="block text-gray-700 font-medium mb-2">Level</label>
               <select
-                name="company"
-                value={formData.company}
+                name="level"
+                value={formData.level}
                 onChange={handleChange}
                 required
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"

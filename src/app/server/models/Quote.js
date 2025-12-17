@@ -21,6 +21,7 @@ const quoteSchema = new mongoose.Schema({
   company: String,
   service: String,
   message: String,
+  level: String,
   designType: String,
   nickname: String,
   status: {

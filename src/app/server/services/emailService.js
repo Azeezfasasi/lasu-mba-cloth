@@ -149,10 +149,9 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
         </div>
         <div class="content">
           <p>Hello ${quoteData.name},</p>
-          <p>Thank you for submitting your LASUMBA T-Shirt request! We have received your request and our team will review it shortly.</p>
-          <p>We typically respond to quote requests within 24-48 business hours. You will receive an email update with details about your quote.</p>
+          <p>Thank you for submitting your request for the LASUMBA T-Shirt. We are pleased to confirm that your request has been received and reviewed.</p>
 
-          <p>Below is your submitted data.</p>
+          <p>Below are the details of your submission for your reference:</p>
           <table class="details-table">
             <tr>
               <td>Student Name:</td>
@@ -168,7 +167,7 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
             </tr>
             <tr>
               <td>Level:</td>
-              <td>${quoteData.company || "N/A"}</td>
+              <td>${quoteData.level || "N/A"}</td>
             </tr>
             <tr>
               <td>Design Type:</td>
@@ -190,8 +189,18 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
           <p><strong>Request Details:</strong></p>
           <p>${quoteData.message || "N/A"}</p>
 
-          <p>If you have any questions in the meantime, please feel free to reach out to us.</p>
-          <p>Best regards,<br>LASUMBA Games Committee</p>
+          <p><strong>To proceed with your order, please make payment using the bank details below:</strong></p>
+          <ul class="highlight">
+            <li>Account Name: [Insert Account Name]</li>
+            <li>Bank Name: [Insert Bank Name]</li>
+            <li>Account Number: [Insert Account Number]</li>
+            <li>Amount: [Insert Amount]</li>
+          </ul>
+
+          <p>After making payment, kindly send proof of payment (receipt or transfer confirmation) via WhatsApp</p>
+          <p>Once payment is confirmed, your request status will be updated, and further details regarding T-shirt collection will be communicated to you.</p>
+          <p>If you have any questions or require assistance, please do not hesitate to contact us</p>
+          <p>Kind regards,<br>LASUMBA Games Committee</p>
         </div>
         <div class="footer">
           <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
@@ -203,7 +212,7 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
 
   return sendEmail({
     to: quoteData.email,
-    subject: `Quote Request Received - Reference ID: ${quoteData._id}`,
+    subject: `LASUMBA T-Shirt Request Confirmation & Payment Details - Reference ID: ${quoteData._id}`,
     html,
   });
 };
@@ -352,7 +361,9 @@ export const sendAdminQuoteNotification = async (quoteData) => {
           <h2>New T-Shirt Request Received</h2>
         </div>
         <div class="content">
-          <p>A new T-shirt request has been submitted and requires your attention.</p>
+          <p>Dear Admin Committee,</p>
+          <p>A new LASUMBA T-Shirt request has been submitted and requires your review.</p>
+          <p>Below are the details of the request:</p>
           <table class="details-table">
             <tr>
               <td>Student Name:</td>
@@ -368,7 +379,7 @@ export const sendAdminQuoteNotification = async (quoteData) => {
             </tr>
             <tr>
               <td>Level:</td>
-              <td>${quoteData.company || "N/A"}</td>
+              <td>${quoteData.level || "N/A"}</td>
             </tr>
             <tr>
               <td>Design Type:</td>
@@ -387,9 +398,11 @@ export const sendAdminQuoteNotification = async (quoteData) => {
               <td>${new Date(quoteData.createdAt).toLocaleString()}</td>
             </tr>
           </table>
-          <p><strong>Quote Details:</strong></p>
+          <p><strong>Request Notes::</strong></p>
           <p>${quoteData.message || "N/A"}</p>
-          <p>Please log in to the admin panel to view and manage this quote.</p>
+          <p>Please review the submitted data for accuracy and completeness.</p>
+          <p>Kindly log in to the admin panel to review, approve, and manage this request.</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
         </div>
         <div class="footer">
           <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
@@ -401,7 +414,7 @@ export const sendAdminQuoteNotification = async (quoteData) => {
 
   return sendEmail({
     to: adminEmail,
-    subject: `[ACTION REQUIRED] New Quote Request - ID: ${quoteData._id}`,
+    subject: `New LASUMBA T-Shirt Request Submitted - ID: ${quoteData._id}`,
     html,
   });
 };
