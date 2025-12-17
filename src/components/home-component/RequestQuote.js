@@ -118,15 +118,15 @@ export default function RequestQuote() {
             <div>
               <label className="block text-gray-700 font-medium mb-2">Level</label>
               <select
-                name="level"
+                name="company"
                 value={formData.company}
                 onChange={handleChange}
                 required
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"
               >
                 <option value="">-- Choose Level --</option>
-                <option value="White">MBA 1</option>
-                <option value="Blue LASUMBA T-Shirt">MBA 2</option>
+                <option value="MBA 1">MBA 1</option>
+                <option value="MBA 2">MBA 2</option>
               </select>
             </div>
 
