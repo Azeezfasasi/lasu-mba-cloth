@@ -8,21 +8,21 @@ export default function Hero() {
   const slides = [
     {
       title: 'Celebrate Your Achievements in Style',
-      subtitle: 'Custom-designed academic and corporate uniforms that make every occasion memorable.',
+      subtitle: 'Custom-designed academic and corporate T-shirts that make every occasion memorable.',
       cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/tshirt2.jpeg', alt: 'Professional development' }
     },
     {
-      title: 'Order Bespoke LASU MBA T-Shirt',
-      subtitle: 'Showcase your LASU MBA pride with our exclusive custom T-Shirt, tailored for graduations and special events.',
+      title: 'Order LASUMBA T-Shirt',
+      subtitle: 'Showcase your LASUMBA pride with our exclusive custom T-Shirt, tailored for special events.',
       cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/tshirt3.jpeg', alt: 'Expert mentorship' }
     },
     {
       title: 'Hurry Up! Limited Time Offer',
-      subtitle: 'Elevate Your Style with LASU MBA T-Shirts',
+      subtitle: 'Elevate Your Style with LASUMBA T-Shirts',
       cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/tshirt2.jpeg', alt: 'Professional training' }

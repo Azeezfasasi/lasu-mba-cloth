@@ -9,11 +9,11 @@ export default function HomeAbout() {
         <div className="flex-1 w-full">
           <div className="relative w-full h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="/images/projectplaceholder.png" 
+              src="/images/tshirt2.jpeg" 
               alt="Rayob Engineering Team"
               fill
               sizes='100%'
-              className="object-cover"
+              className="object-fill"
             />
           </div>
         </div>
@@ -21,13 +21,21 @@ export default function HomeAbout() {
         {/* Text Content */}
         <div className="flex-1">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-            About Lagos State University MBA Students' Association
+            About LASUMBA Games
           </h2>
           <p className="text-gray-600 mb-6">
-            The Lagos State University MBA Students' Association (LASU PGSA) is the official body representing postgraduate students at Lagos State University. Established to advocate for the rights and welfare of postgraduate students, LASU MBA plays a pivotal role in enhancing the academic and social experience of its members.
+            The Lagos State University MBA Students' Association (LASUMBA) is the official body representing postgraduate students at Lagos State University. Established to advocate for the rights and welfare of postgraduate students, LASUMBA plays a pivotal role in enhancing the academic and social experience of its members.
           </p>
           <p className="text-gray-600 mb-6">
-            LASU MBA is committed to fostering a supportive community for postgraduate students through various initiatives, including academic workshops, networking events, and social activities. The association works closely with the university administration to address student concerns and promote a conducive learning environment.
+            The LASUMBA Games 2026 will feature a blend of competitive and fun-filled activities such as:
+            <ul className="list-disc list-inside mb-6">
+            <li>FOOTBALL - The ultimate sport of passion and teamwork.</li>
+            <li>AYO OLOPON - Let’s honour our roots with this traditional game of strategy.</li>
+            <li>TENNIS - Speed, skill and precision will take the stage.</li>
+            <li>CHESS - Where minds clash and kings fall.</li>
+            <li>DRAUGHT - A classic battle of wits and patience.</li>
+            <li>LUDO - Because no event is complete without the thrill of rolling dice and beating friends.</li>
+          </ul>
           </p>
 
           <a
