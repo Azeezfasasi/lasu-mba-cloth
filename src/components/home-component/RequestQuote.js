@@ -114,15 +114,18 @@ export default function RequestQuote() {
 
             {/* Company */}
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Department</label>
-              <input
-                type="text"
+              <label className="block text-gray-700 font-medium mb-2">Level</label>
+              <select
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Your Department"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-900"
-              />
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"
+              >
+                <option value="">-- Choose Level --</option>
+                <option value="White">MBA 1</option>
+                <option value="Blue LASUMBA T-Shirt">MBA 2</option>
+              </select>
             </div>
 
             {/* Design Type */}
@@ -136,23 +139,13 @@ export default function RequestQuote() {
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"
               >
                 <option value="">-- Choose design type --</option>
-                <option value="White LASUMBA T-Shirt">White LASUMBA T-Shirt</option>
-                <option value="Blue LASUMBA T-Shirt">Blue LASUMBA T-Shirt</option>
-                <option value="Black LASUMBA T-Shirt">Black LASUMBA T-Shirt</option>
+                <option value="White">White</option>
+                <option value="Blue LASUMBA T-Shirt">Blue</option>
+                <option value="Blue LASUMBA T-Shirt">Navy Blue</option>
+                <option value="Blue LASUMBA T-Shirt">Royal Blue</option>
+                <option value="Black LASUMBA T-Shirt">Black</option>
+                <option value="Black LASUMBA T-Shirt">Pink</option>
               </select>
-            </div>
-
-            {/* Nickname */}
-            <div>
-              <label className="block text-gray-700 font-medium mb-2">Nickname</label>
-              <input
-                type="text"
-                name="nickname"
-                value={formData.nickname}
-                onChange={handleChange}
-                placeholder="Enter your nickname"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-900"
-              />
             </div>
 
             {/* Service Type */}
