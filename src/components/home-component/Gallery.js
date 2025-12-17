@@ -115,7 +115,7 @@ export default function Gallery() {
             Our Gallery
           </h1>
           <p className="text-gray-600 text-sm sm:text-base lg:text-lg max-w-2xl">
-            Explore our collection of projects, engineering works, and professional services. Browse through our featured galleries and discover our latest achievements.
+            Explore our collection events. Browse through our featured galleries and discover our latest achievements.
           </p>
         </div>
 
