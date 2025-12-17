@@ -1,20 +1,9 @@
-import nodemailer from "nodemailer";
+import { sendEmailViaZoho } from "../utils/zohoEmailService.js";
 
-// Email configuration with nodemailer
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT) || 587,
-  secure: process.env.SMTP_SECURE === "true", // true for 465, false for other ports
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
-
-const defaultFrom = `"${process.env.SMTP_FROM_NAME || "Rayob Engineering"}" <${process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER}>`;
+const defaultFrom = `"${process.env.ZOHO_SENDER_NAME || "LASUMBA Games"}" <${process.env.ZOHO_SENDER_EMAIL}>`;
 
 /**
- * Send email using nodemailer
+ * Send email using Zoho
  * @param {Object} options - Email options
  * @param {string} options.to - Recipient email
  * @param {string} options.subject - Email subject
@@ -24,14 +13,20 @@ const defaultFrom = `"${process.env.SMTP_FROM_NAME || "Rayob Engineering"}" <${p
  */
 export const sendEmail = async ({ to, subject, html, from = defaultFrom }) => {
   try {
-    const info = await transporter.sendMail({
-      from,
+    const result = await sendEmailViaZoho({
       to,
       subject,
-      html,
+      htmlContent: html,
+      senderEmail: process.env.ZOHO_SENDER_EMAIL,
+      senderName: process.env.ZOHO_SENDER_NAME || "LASUMBA Games",
     });
-    console.log("Email sent successfully:", info.messageId);
-    return { success: true, messageId: info.messageId };
+
+    if (result.success) {
+      console.log("Email sent successfully via Zoho:", result.messageId);
+      return { success: true, messageId: result.messageId };
+    } else {
+      throw new Error(result.error || "Failed to send email via Zoho");
+    }
   } catch (error) {
     console.error("Email sending failed:", error.message);
     throw new Error(`Failed to send email: ${error.message}`);
@@ -58,7 +53,7 @@ export const sendVerificationEmail = async (email, firstName, verificationLink) 
     <body>
       <div class="container">
         <div class="header">
-          <h2>Welcome to Rayob Engineering!</h2>
+          <h2>Welcome to LASUMBA Games!</h2>
         </div>
         <div class="content">
           <p>Hello ${firstName},</p>
@@ -70,7 +65,7 @@ export const sendVerificationEmail = async (email, firstName, verificationLink) 
           <p>If you didn't create this account, please ignore this email.</p>
         </div>
         <div class="footer">
-          <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -79,7 +74,7 @@ export const sendVerificationEmail = async (email, firstName, verificationLink) 
 
   return sendEmail({
     to: email,
-    subject: "Verify Your Email - Rayob Engineering",
+    subject: "Verify Your Email - LASUMBA Games",
     html,
   });
 };
@@ -116,7 +111,7 @@ export const sendPasswordResetEmail = async (email, firstName, resetLink) => {
           <p>If you didn't request a password reset, please ignore this email.</p>
         </div>
         <div class="footer">
-          <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -125,7 +120,7 @@ export const sendPasswordResetEmail = async (email, firstName, resetLink) => {
 
   return sendEmail({
     to: email,
-    subject: "Password Reset Request - Rayob Engineering",
+    subject: "Password Reset Request - LASUMBA Games",
     html,
   });
 };
@@ -133,7 +128,7 @@ export const sendPasswordResetEmail = async (email, firstName, resetLink) => {
 /**
  * Send quote request confirmation email to customer
  */
-export const sendQuoteRequestConfirmation = async (customerEmail, customerName, quoteId) => {
+export const sendQuoteRequestConfirmation = async (quoteData) => {
   const html = `
     <!DOCTYPE html>
     <html>
@@ -141,7 +136,7 @@ export const sendQuoteRequestConfirmation = async (customerEmail, customerName, 
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .header { background-color: #2196F3; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .header { background-color: #0000FF; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
         .content { padding: 20px; }
         .highlight { background-color: #f0f0f0; padding: 15px; border-left: 4px solid #2196F3; margin: 15px 0; }
         .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
@@ -150,21 +145,56 @@ export const sendQuoteRequestConfirmation = async (customerEmail, customerName, 
     <body>
       <div class="container">
         <div class="header">
-          <h2>Quote Request Received</h2>
+          <h2>T-Shirt Request Received</h2>
         </div>
         <div class="content">
-          <p>Hello ${customerName},</p>
-          <p>Thank you for submitting your quote request! We have received your inquiry and our team will review it shortly.</p>
-          <div class="highlight">
-            <p><strong>Quote Reference ID:</strong> ${quoteId}</p>
-            <p>Please keep this ID for your records.</p>
-          </div>
+          <p>Hello ${quoteData.name},</p>
+          <p>Thank you for submitting your LASUMBA T-Shirt request! We have received your request and our team will review it shortly.</p>
           <p>We typically respond to quote requests within 24-48 business hours. You will receive an email update with details about your quote.</p>
+
+          <p>Below is your submitted data.</p>
+          <table class="details-table">
+            <tr>
+              <td>Student Name:</td>
+              <td>${quoteData.name || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>${quoteData.email || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>WhatsApp Number:</td>
+              <td>${quoteData.phone || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Level:</td>
+              <td>${quoteData.company || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Design Type:</td>
+              <td>${quoteData.designType || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Service:</td>
+              <td>${quoteData.service || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Current Status:</td>
+              <td>${quoteData.status || "pending"}</td>
+            </tr>
+            <tr>
+              <td>Submitted Date:</td>
+              <td>${new Date(quoteData.createdAt).toLocaleString()}</td>
+            </tr>
+          </table>
+          <p><strong>Request Details:</strong></p>
+          <p>${quoteData.message || "N/A"}</p>
+
           <p>If you have any questions in the meantime, please feel free to reach out to us.</p>
-          <p>Best regards,<br>Rayob Engineering Team</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
         </div>
         <div class="footer">
-          <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -226,11 +256,11 @@ export const sendQuoteStatusUpdate = async (customerEmail, customerName, quoteId
           <p><span class="status-badge">${status.toUpperCase()}</span></p>
           <p><strong>Quote Reference ID:</strong> ${quoteId}</p>
           ${details ? `<div class="details"><p>${details}</p></div>` : ""}
-          <p>Thank you for choosing Rayob Engineering!</p>
-          <p>Best regards,<br>Rayob Engineering Team</p>
+          <p>Thank you for choosing LASUMBA Games!</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
         </div>
         <div class="footer">
-          <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -274,10 +304,10 @@ export const sendQuoteReplyNotification = async (customerEmail, customerName, qu
             <p>${replyMessage}</p>
           </div>
           <p>Please review the details above and let us know if you have any questions.</p>
-          <p>Best regards,<br>Rayob Engineering Team</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
         </div>
         <div class="footer">
-          <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -319,30 +349,34 @@ export const sendAdminQuoteNotification = async (quoteData) => {
     <body>
       <div class="container">
         <div class="header">
-          <h2>New Quote Request Received</h2>
+          <h2>New T-Shirt Request Received</h2>
         </div>
         <div class="content">
-          <p>A new quote request has been submitted and requires your attention.</p>
+          <p>A new T-shirt request has been submitted and requires your attention.</p>
           <table class="details-table">
             <tr>
-              <td>Quote ID:</td>
-              <td>${quoteData._id}</td>
+              <td>Student Name:</td>
+              <td>${quoteData.name || "N/A"}</td>
             </tr>
             <tr>
-              <td>Customer Name:</td>
-              <td>${quoteData.customerName || "N/A"}</td>
+              <td>Email:</td>
+              <td>${quoteData.email || "N/A"}</td>
             </tr>
             <tr>
-              <td>Customer Email:</td>
-              <td>${quoteData.customerEmail || "N/A"}</td>
+              <td>Phone:</td>
+              <td>${quoteData.phone || "N/A"}</td>
             </tr>
             <tr>
-              <td>Customer Phone:</td>
-              <td>${quoteData.customerPhone || "N/A"}</td>
+              <td>Level:</td>
+              <td>${quoteData.company || "N/A"}</td>
             </tr>
             <tr>
-              <td>Service Type:</td>
-              <td>${quoteData.serviceType || "N/A"}</td>
+              <td>Design Type:</td>
+              <td>${quoteData.designType || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Service:</td>
+              <td>${quoteData.service || "N/A"}</td>
             </tr>
             <tr>
               <td>Status:</td>
@@ -358,7 +392,7 @@ export const sendAdminQuoteNotification = async (quoteData) => {
           <p>Please log in to the admin panel to view and manage this quote.</p>
         </div>
         <div class="footer">
-          <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
         </div>
       </div>
     </body>

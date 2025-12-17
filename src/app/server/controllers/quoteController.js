@@ -19,10 +19,10 @@ export const createQuote = async (req) => {
 
     // Send confirmation email to customer
     try {
-      if (quote.customerEmail && quote.customerName) {
+      if (quote.email && quote.name) {
         await sendQuoteRequestConfirmation(
-          quote.customerEmail,
-          quote.customerName,
+          quote.email,
+          quote.name,
           quote._id.toString()
         );
       }
@@ -94,10 +94,10 @@ export const changeQuoteStatus = async (req, quoteId) => {
 
     // Send status update email to customer
     try {
-      if (quote.customerEmail && quote.customerName) {
+      if (quote.email && quote.name) {
         await sendQuoteStatusUpdate(
-          quote.customerEmail,
-          quote.customerName,
+          quote.email,
+          quote.name,
           quoteId,
           status,
           body.details || ""
@@ -135,10 +135,10 @@ export const replyToQuote = async (req, quoteId) => {
 
     // Send reply notification email to customer
     try {
-      if (quote.customerEmail && quote.customerName) {
+      if (quote.email && quote.name) {
         await sendQuoteReplyNotification(
-          quote.customerEmail,
-          quote.customerName,
+          quote.email,
+          quote.name,
           quoteId,
           message
         );

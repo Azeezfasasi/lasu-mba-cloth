@@ -4,6 +4,7 @@ import crypto from "crypto";
 import User from "../models/User.js";
 import { connectDB } from "../db/connect.js";
 import { sendVerificationEmail, sendPasswordResetEmail } from "../services/emailService.js";
+import { sendEmailViaZoho } from "../utils/zohoEmailService.js";
 
 // JWT Secret
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
@@ -890,14 +891,49 @@ export const adminResetPassword = async (req, userId) => {
     user.notes += `Password reset by admin on ${new Date().toISOString()}`;
     await user.save();
 
-    // Send notification email
+    // Send notification email via Zoho
     try {
-      await transporter.sendMail({
+      await sendEmailViaZoho({
         to: user.email,
         subject: "Your Password Has Been Reset",
-        html: `<h2>Password Reset by Administrator</h2>
-               <p>Your password has been reset to: <strong>${newPassword}</strong></p>
-               <p>Please change this password immediately after logging in.</p>`,
+        htmlContent: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+              .header { background-color: #FF9800; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+              .content { padding: 20px; }
+              .warning { background-color: #FFF3E0; padding: 15px; border-left: 4px solid #FF9800; margin: 15px 0; border-radius: 5px; }
+              .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h2>Password Reset by Administrator</h2>
+              </div>
+              <div class="content">
+                <p>Hello ${user.firstName},</p>
+                <p>An administrator has reset your password.</p>
+                <div class="warning">
+                  <p><strong>Your temporary password:</strong></p>
+                  <p style="font-size: 18px; font-weight: bold; color: #FF9800;">${newPassword}</p>
+                </div>
+                <p><strong>IMPORTANT:</strong> Please change this password immediately after logging in.</p>
+                <p>If you did not request this password reset, please contact your administrator immediately.</p>
+                <p>Best regards,<br>Rayob Engineering Team</p>
+              </div>
+              <div class="footer">
+                <p>&copy; 2025 Rayob Engineering. All rights reserved.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `,
+        senderEmail: process.env.ZOHO_SENDER_EMAIL,
+        senderName: process.env.ZOHO_SENDER_NAME || "Rayob Engineering",
       });
     } catch (mailError) {
       console.log("Email notification failed:", mailError.message);

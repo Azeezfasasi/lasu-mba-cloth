@@ -1,18 +1,15 @@
 import { Subscriber, Campaign, Template, ActivityLog } from '../models/Newsletter.js';
 import { connectDB } from '@/utils/db.js';
 import {
-  sendEmailViaBrevo,
-  sendBulkEmailsViaBrevo,
-  createBrevoContact,
-  updateBrevoContact,
-  deleteBrevoContact,
-  verifyBrevoApiKey,
-} from '@/app/server/utils/brevoEmailService.js';
+  sendEmailViaZoho,
+  sendBulkEmailsViaZoho,
+  verifyZohoConfiguration,
+} from '@/app/server/utils/zohoEmailService.js';
 
-// Verify Brevo configuration on startup
-if (process.env.BREVO_API_KEY) {
-  verifyBrevoApiKey().catch(error => {
-    console.log('Brevo configuration notice:', error.message);
+// Verify Zoho configuration on startup
+if (process.env.ZOHO_SENDER_EMAIL && process.env.ZOHO_APP_PASSWORD) {
+  verifyZohoConfiguration().catch(error => {
+    console.log('Zoho configuration notice:', error.message);
   });
 }
 
@@ -49,27 +46,9 @@ export const subscribeToNewsletter = async (subscriberData) => {
 
     await subscriber.save();
 
-    // Create/Update contact in Brevo
-    try {
-      await createBrevoContact({
-        email,
-        firstName: firstName || '',
-        lastName: lastName || '',
-        listIds: [1], // Default list in Brevo
-        attributes: {
-          FIRSTNAME: firstName || '',
-          LASTNAME: lastName || '',
-          TAGS: tags.join(','),
-        },
-      });
-    } catch (brevoError) {
-      console.warn('Warning: Could not sync contact with Brevo:', brevoError.message);
-      // Don't fail the subscription if Brevo sync fails
-    }
-
     // Send welcome email
     try {
-      const emailResult = await sendEmailViaBrevo({
+      const emailResult = await sendEmailViaZoho({
         to: email,
         subject: 'Welcome to Rayob Engineering Newsletter',
         htmlContent: `
@@ -131,8 +110,8 @@ The Rayob Engineering Team
 ---
 To unsubscribe: ${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/newsletter/unsubscribe?email=${email}
         `,
-        senderEmail: process.env.BREVO_SENDER_EMAIL || 'noreply@rayobengineering.com',
-        senderName: process.env.BREVO_SENDER_NAME || 'Rayob Engineering',
+        senderEmail: process.env.ZOHO_SENDER_EMAIL || 'noreply@zoho.com',
+        senderName: process.env.ZOHO_SENDER_NAME || 'Rayob Engineering',
         tags: ['welcome', 'subscription'],
       });
       
@@ -175,17 +154,6 @@ export const unsubscribeFromNewsletter = async (email) => {
     subscriber.subscriptionStatus = 'inactive';
     subscriber.unsubscribedAt = new Date();
     await subscriber.save();
-
-    // Update contact status in Brevo
-    try {
-      await updateBrevoContact(email, {
-        attributes: {
-          UNSUBSCRIBED: true,
-        },
-      });
-    } catch (brevoError) {
-      console.warn('Warning: Could not update Brevo contact:', brevoError.message);
-    }
 
     // Log activity
     await ActivityLog.create({
@@ -311,13 +279,6 @@ export const deleteSubscriber = async (email) => {
 
     if (!subscriber) {
       throw new Error('Subscriber not found');
-    }
-
-    // Delete contact from Brevo
-    try {
-      await deleteBrevoContact(email);
-    } catch (brevoError) {
-      console.warn('Warning: Could not delete contact from Brevo:', brevoError.message);
     }
 
     // Remove associated activity logs
@@ -483,14 +444,14 @@ ${unsubscribeLink}
         subject: campaign.subject,
         htmlContent,
         textContent, // ← THIS WAS MISSING!
-        senderEmail: process.env.BREVO_SENDER_EMAIL || campaign.senderEmail,
-        senderName: process.env.BREVO_SENDER_NAME || campaign.senderName,
+        senderEmail: process.env.ZOHO_SENDER_EMAIL || campaign.senderEmail,
+        senderName: process.env.ZOHO_SENDER_NAME || campaign.senderName,
         tags: ['newsletter', campaign.campaignType],
       };
     });
 
-    // Send via Brevo
-    const results = await sendBulkEmailsViaBrevo(emailList);
+    // Send via Zoho
+    const results = await sendBulkEmailsViaZoho(emailList);
 
     // Create activity logs for successful sends
     for (const subscriber of subscribers) {
