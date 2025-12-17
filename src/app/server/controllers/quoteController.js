@@ -3,6 +3,7 @@ import { connectDB } from "../db/connect";
 import User from "../models/User";
 import { NextResponse } from "next/server";
 import {
+  sendEmail,
   sendQuoteRequestConfirmation,
   sendQuoteStatusUpdate,
   sendQuoteReplyNotification,
@@ -86,21 +87,23 @@ export const changeQuoteStatus = async (req, quoteId) => {
     
     const oldStatus = quote.status;
     quote.status = status;
+    quote.details = body.details || "";
     await quote.save();
 
     // Send status update email to customer
     try {
       if (quote.email && quote.name) {
-        await sendQuoteStatusUpdate(
-          quote.email,
-          quote.name,
-          quoteId,
-          status,
-          body.details || ""
-        );
+        await sendQuoteStatusUpdate(quote);
       }
     } catch (emailError) {
-      console.log("Failed to send status update email:", emailError.message);
+      console.log("Failed to send status update email to customer:", emailError.message);
+    }
+
+    // Send admin notification about status change
+    try {
+      await sendAdminQuoteNotification(quote);
+    } catch (emailError) {
+      console.log("Failed to send admin notification about status change:", emailError.message);
     }
 
     return NextResponse.json({ success: true, quote }, { status: 200 });
@@ -127,20 +130,23 @@ export const replyToQuote = async (req, quoteId) => {
     if (!quote) return NextResponse.json({ success: false, message: "Quote not found" }, { status: 404 });
     quote.replies.push({ sender: senderId, senderName: sender.firstName + ' ' + sender.lastName, message });
     quote.status = "replied";
+    quote.replyMessage = message;
     await quote.save();
 
     // Send reply notification email to customer
     try {
       if (quote.email && quote.name) {
-        await sendQuoteReplyNotification(
-          quote.email,
-          quote.name,
-          quoteId,
-          message
-        );
+        await sendQuoteReplyNotification(quote);
       }
     } catch (emailError) {
-      console.log("Failed to send reply notification email:", emailError.message);
+      console.log("Failed to send reply notification email to customer:", emailError.message);
+    }
+
+    // Send admin notification about the reply
+    try {
+      await sendAdminQuoteNotification(quote);
+    } catch (emailError) {
+      console.log("Failed to send admin notification about reply:", emailError.message);
     }
 
     return NextResponse.json({ success: true, quote }, { status: 200 });
@@ -157,8 +163,69 @@ export const assignQuote = async (req, quoteId) => {
     const { assignedTo } = body;
     const quote = await Quote.findById(quoteId);
     if (!quote) return NextResponse.json({ success: false, message: "Quote not found" }, { status: 404 });
+    
+    const assignedUser = await User.findById(assignedTo);
+    if (!assignedUser) return NextResponse.json({ success: false, message: "Assigned user not found" }, { status: 404 });
+    
     quote.assignedTo = assignedTo;
     await quote.save();
+
+    // Send assignment notification email to customer
+    try {
+      if (quote.email && quote.name) {
+        const assignmentNotificationHtml = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+              .header { background-color: #2196F3; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+              .content { padding: 20px; }
+              .details { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin: 15px 0; }
+              .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h2>Your Request Has Been Assigned</h2>
+              </div>
+              <div class="content">
+                <p>Hello ${quote.name},</p>
+                <p>Your T-shirt request has been assigned to a staff member for processing.</p>
+                <div class="details">
+                  <p><strong>Assigned To:</strong> ${assignedUser.firstName} ${assignedUser.lastName}</p>
+                  <p><strong>Quote Reference ID:</strong> ${quote._id}</p>
+                </div>
+                <p>Your assigned staff member will review your request and contact you soon with further details.</p>
+                <p>Thank you for your patience!</p>
+                <p>Best regards,<br>LASUMBA Games Committee</p>
+              </div>
+              <div class="footer">
+                <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+        await sendEmail({
+          to: quote.email,
+          subject: `Your T-Shirt Request Has Been Assigned - Reference ID: ${quote._id}`,
+          html: assignmentNotificationHtml,
+        });
+      }
+    } catch (emailError) {
+      console.log("Failed to send assignment notification email to customer:", emailError.message);
+    }
+
+    // Send admin notification about assignment
+    try {
+      await sendAdminQuoteNotification(quote);
+    } catch (emailError) {
+      console.log("Failed to send admin notification about assignment:", emailError.message);
+    }
+
     return NextResponse.json({ success: true, quote }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
