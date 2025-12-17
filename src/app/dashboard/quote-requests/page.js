@@ -499,38 +499,33 @@ const ManageQuoteRequests = () => {
 							<div className="p-6 space-y-4">
 								<div className="grid grid-cols-2 gap-4">
 									<div>
-										<label className="block text-sm font-medium text-blue-600 mb-1">Name</label>
+										<label className="block text-sm font-medium text-blue-600 mb-1">Name:</label>
 										<p className="text-gray-900">{selectedRequest.name}</p>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-blue-600 mb-1">Department</label>
+										<label className="block text-sm font-medium text-blue-600 mb-1">Level:</label>
 										<p className="text-gray-900">{selectedRequest.company}</p>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-blue-600 mb-1">Email</label>
+										<label className="block text-sm font-medium text-blue-600 mb-1">Email:</label>
 										<p className="text-gray-900">{selectedRequest.email}</p>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-blue-600 mb-1">Phone</label>
+										<label className="block text-sm font-medium text-blue-600 mb-1">Phone:</label>
 										<p className="text-gray-900">{selectedRequest.phone}</p>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-blue-600 mb-1">T-Shirt Design Type</label>
+										<label className="block text-sm font-medium text-blue-600 mb-1">T-Shirt Design Type:</label>
 										<p className="text-gray-900">{selectedRequest.designType}</p>
 									</div>
 									<div>
-										<label className="block text-sm font-medium text-blue-600 mb-1">Nickname</label>
-										<p className="text-gray-900">{selectedRequest.nickname}</p>
+										<label className="block text-sm font-medium text-blue-600 mb-1">Size:</label>
+										<p className="text-gray-900">{selectedRequest.service}</p>
 									</div>
 								</div>
 
 								<div>
-									<label className="block text-sm font-medium text-blue-600 mb-1">Size</label>
-									<p className="text-gray-900">{selectedRequest.service}</p>
-								</div>
-
-								<div>
-									<label className="block text-sm font-medium text-blue-600 mb-1">Request Details</label>
+									<label className="block text-sm font-medium text-blue-600 mb-1">Request Details:</label>
 									<p className="text-gray-900 bg-gray-50 p-4 rounded-lg whitespace-pre-wrap">
 										{selectedRequest.message}
 									</p>
@@ -538,7 +533,7 @@ const ManageQuoteRequests = () => {
 
 								<div className="grid grid-cols-2 gap-4">
 									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+										<label className="block text-sm font-medium text-gray-700 mb-1">Status:</label>
 										<span className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(selectedRequest.status)}`}>
 											{selectedRequest.status === 'pending' && '⏳ Pending'}
 											{selectedRequest.status === 'quoted' && '💬 Quoted'}
