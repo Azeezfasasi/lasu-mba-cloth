@@ -16,10 +16,9 @@ export default function Gallery() {
 
   const CATEGORIES = [
     { value: 'all', label: 'All Categories' },
-    { value: 'project', label: 'Projects' },
-    { value: 'engineering', label: 'Engineering' },
-    { value: 'fibre', label: 'Fibre' },
-    { value: 'maintenance', label: 'Maintenance' },
+    { value: 'lasumba games', label: 'Lasumba Games' },
+    { value: 'events', label: 'Events' },
+    { value: 'lasumba t-shirt', label: 'Lasumba t-shirt' },
     { value: 'other', label: 'Other' },
   ];
 

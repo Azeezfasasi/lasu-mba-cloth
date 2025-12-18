@@ -8,7 +8,7 @@ import { createGallery } from '@/app/utils/galleryApi';
 import { Upload, X, Loader } from 'lucide-react';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 
-const CATEGORIES = ['lasumba games', 'events', 'Lasumba t-shirt', 'other'];
+const CATEGORIES = ['lasumba games', 'events', 'lasumba t-shirt', 'other'];
 const TAGS = ['lasumba', 'games', 't-shirt', 'students', 'events', 'fun'];
 
 export default function AddGalleryPage() {
