@@ -191,10 +191,10 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
 
           <p><strong>To proceed with your order, please make payment using the bank details below:</strong></p>
           <ul class="highlight">
-            <li>Account Name: [Insert Account Name]</li>
-            <li>Bank Name: [Insert Bank Name]</li>
-            <li>Account Number: [Insert Account Number]</li>
-            <li>Amount: [Insert Amount]</li>
+            <li>Account Name: Lasu Managers Association</li>
+            <li>Bank Name: Wema Bank</li>
+            <li>Account Number: 0227694758</li>
+            <li>Amount: ₦20,000</li>
           </ul>
 
           <p>After making payment, kindly send proof of payment (receipt or transfer confirmation) via WhatsApp</p>
