@@ -7,7 +7,7 @@ export default function HomeAbout() {
         
         {/* Image */}
         <div className="flex-1 w-full">
-          <div className="relative w-full h-64 md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden lg:shadow-lg">
+          <div className="relative w-full h-[400px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden lg:shadow-lg">
             <Image
               src="/images/lasu4.jpeg" 
               alt="Rayob Engineering Team"
