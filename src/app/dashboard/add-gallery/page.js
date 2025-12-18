@@ -21,7 +21,7 @@ export default function AddGalleryPage() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: 'accommodation',
+    category: 'other',
     featured: false,
     status: 'active',
     businessName: '',

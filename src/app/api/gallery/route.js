@@ -88,10 +88,20 @@ export async function POST(req) {
     return Response.json(responseData, { status: statusCode });
   } catch (error) {
     console.error('Gallery POST error:', error);
+    
+    // Extract detailed error information
+    let errorDetails = error.message;
+    if (error.errors) {
+      errorDetails = Object.entries(error.errors)
+        .map(([key, val]) => `${key}: ${val.message}`)
+        .join(', ');
+    }
+    
     return Response.json(
       {
         message: 'Error creating gallery',
-        error: error.message,
+        error: errorDetails,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
       },
       { status: 500 }
     );
