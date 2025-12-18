@@ -7,13 +7,13 @@ export default function HomeAbout() {
         
         {/* Image */}
         <div className="flex-1 w-full">
-          <div className="relative w-full h-64 md:h-80 lg:h-[450px] rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-full h-64 md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden lg:shadow-lg">
             <Image
-              src="/images/tshirt2.jpeg" 
+              src="/images/lasu4.jpeg" 
               alt="Rayob Engineering Team"
               fill
               sizes='100%'
-              className="object-fill"
+              className="object-contain"
             />
           </div>
         </div>
