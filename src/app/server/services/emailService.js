@@ -174,7 +174,7 @@ export const sendQuoteRequestConfirmation = async (quoteData) => {
               <td>${quoteData.designType || "N/A"}</td>
             </tr>
             <tr>
-              <td>Service:</td>
+              <td>T-shirt Size:</td>
               <td>${quoteData.service || "N/A"}</td>
             </tr>
             <tr>
@@ -386,7 +386,7 @@ export const sendAdminQuoteNotification = async (quoteData) => {
               <td>${quoteData.designType || "N/A"}</td>
             </tr>
             <tr>
-              <td>Service:</td>
+              <td>T-shirt Size:</td>
               <td>${quoteData.service || "N/A"}</td>
             </tr>
             <tr>
