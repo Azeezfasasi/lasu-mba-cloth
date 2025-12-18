@@ -264,7 +264,7 @@ export default function GalleryDetailPage() {
                     <div className="flex items-start gap-3">
                       <Building2 className="h-5 w-5 text-blue-900 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-xs text-gray-600 font-medium">Business</p>
+                        <p className="text-xs text-gray-600 font-medium">Activity</p>
                         <p className="text-sm sm:text-base text-gray-900 font-semibold wrap-break-word">
                           {gallery.businessName}
                         </p>

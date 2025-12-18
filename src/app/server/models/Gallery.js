@@ -13,7 +13,7 @@ const galleryItemSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['project', 'engineering', 'fibre', 'maintenance', 'other'],
+    enum: ['lasumba games', 'events', 'lasumba t-shirt', 'other'],
     default: 'other',
   },
   images: [
