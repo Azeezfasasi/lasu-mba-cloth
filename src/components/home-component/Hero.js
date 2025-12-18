@@ -9,21 +9,21 @@ export default function Hero() {
     {
       title: 'Celebrate Your Achievements in Style',
       subtitle: 'Custom-designed academic and corporate T-shirts that make every occasion memorable.',
-      cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
+      cta: { label: 'Order LASUMBA T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/tshirt2.jpeg', alt: 'Professional development' }
     },
     {
       title: 'Order LASUMBA T-Shirt',
       subtitle: 'Showcase your LASUMBA pride with our exclusive custom T-Shirt, tailored for special events.',
-      cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
+      cta: { label: 'Order LASUMBA T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/tshirt3.jpeg', alt: 'Expert mentorship' }
     },
     {
       title: 'Hurry Up! Limited Time Offer',
       subtitle: 'Elevate Your Style with LASUMBA T-Shirts',
-      cta: { label: 'Order Custom T-Shirt', href: '/request-a-quote' },
+      cta: { label: 'Order LASUMBA T-Shirt', href: '/request-a-quote' },
       bg: 'linear-gradient(135deg,#87CEEB 100%,#87CEEB 100%)',
       image: { src: '/images/tshirt2.jpeg', alt: 'Professional training' }
     }
@@ -108,9 +108,9 @@ export default function Hero() {
                     <div className="flex-1 max-w-full md:max-w-2xl">
                       <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">{s.title}</h2>
                       <p className="text-gray-700 mb-6">{s.subtitle}</p>
-                      <div className="flex gap-3">
-                        <Link href={s.cta.href} className="inline-block px-2 md:px-5 py-3 bg-blue-900 text-white rounded-md font-medium">{s.cta.label}</Link>
-                        <Link href="/cloth-design" className="inline-block px-2 md:px-5 py-3 border border-blue-900 rounded-md text-gray-700">View Design</Link>
+                      <div className="flex flex-col md:flex-row gap-3">
+                        <Link href={s.cta.href} className="inline-block px-2 md:px-5 py-3 bg-blue-900 text-white rounded-md font-medium text-center">{s.cta.label}</Link>
+                        <Link href="/cloth-design" className="inline-block px-2 md:px-5 py-3 border border-blue-900 rounded-md text-gray-700 text-center">View T-shirt Design</Link>
                       </div>
                     </div>
                     {/* Right Image - visible on lg (laptop) and up only */}

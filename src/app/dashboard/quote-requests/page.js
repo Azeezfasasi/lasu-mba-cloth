@@ -391,8 +391,11 @@ const ManageQuoteRequests = () => {
 											<td className="px-6 py-4 whitespace-nowrap">
 												<span className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(request.status)}`}>
 													{request.status === 'pending' && '⏳ Pending'}
-													{request.status === 'quoted' && '💬 Quoted'}
+													{request.status === 'in-progress' && '🔄 In-Progress'}
 													{request.status === 'completed' && '✓ Completed'}
+													{request.status === 'replied' && '💬 Replied'}
+													{request.status === 'closed' && '✗ Closed'}
+													{request.status === 'quoted' && '💬 Quoted'}
 													{request.status === 'rejected' && '✗ Rejected'}
 												</span>
 											</td>
@@ -536,8 +539,11 @@ const ManageQuoteRequests = () => {
 										<label className="block text-sm font-medium text-gray-700 mb-1">Status:</label>
 										<span className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(selectedRequest.status)}`}>
 											{selectedRequest.status === 'pending' && '⏳ Pending'}
-											{selectedRequest.status === 'quoted' && '💬 Quoted'}
+											{selectedRequest.status === 'in-progress' && '🔄 In-Progress'}
 											{selectedRequest.status === 'completed' && '✓ Completed'}
+											{selectedRequest.status === 'replied' && '💬 Replied'}
+											{selectedRequest.status === 'closed' && '✗ Closed'}
+											{selectedRequest.status === 'quoted' && '💬 Quoted'}
 											{selectedRequest.status === 'rejected' && '✗ Rejected'}
 										</span>
 									</div>
@@ -656,8 +662,11 @@ const ManageQuoteRequests = () => {
 									<label className="block text-sm font-medium text-gray-700 mb-2">Current Status</label>
 									<span className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(selectedRequest.status)}`}>
 										{selectedRequest.status === 'pending' && '⏳ Pending'}
-										{selectedRequest.status === 'quoted' && '💬 Quoted'}
+										{selectedRequest.status === 'in-progress' && '🔄 In-Progress'}
 										{selectedRequest.status === 'completed' && '✓ Completed'}
+										{selectedRequest.status === 'replied' && '💬 Replied'}
+										{selectedRequest.status === 'closed' && '✗ Closed'}
+										{selectedRequest.status === 'quoted' && '💬 Quoted'}
 										{selectedRequest.status === 'rejected' && '✗ Rejected'}
 									</span>
 								</div>

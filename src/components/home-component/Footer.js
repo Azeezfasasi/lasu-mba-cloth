@@ -9,8 +9,8 @@ export default function Footer() {
         <div>
           <h3 className="text-white text-xl font-bold mb-4">LASU MBA</h3>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            LASU MBA is dedicated to providing top-notch custom academic and corporate uniforms for LASU MBA students.
-            Our bespoke designs ensure you look your best for graduations, events, and professional occasions.
+            LASUMBA is dedicated to providing top-notch custom academic and corporate t-shirts for LASUMBA students.
+            Our t-shirt designs ensure you look your best for our LASUMBA games and professional occasions.
           </p>
 
           {/* Social Links */}
@@ -96,12 +96,6 @@ export default function Footer() {
                 (+234) 08060556493
               </a>
             </li>
-            {/* <li className="flex items-center gap-3">
-              <Mail size={18} className="text-blue-500" />
-              <a href="mailto:info@rayobengineering.com" className="hover:text-white transition">
-                info@rayobengineering.com
-              </a>
-            </li> */}
           </ul>
         </div>
       </div>

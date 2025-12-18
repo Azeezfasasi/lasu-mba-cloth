@@ -436,18 +436,18 @@ const ClothDesign360Viewer = () => {
               </h3>
               <ul className="text-gray-700 space-y-2 text-sm">
                 <li>✓ Browse and review all available items</li>
-                <li>✓ Click on order custom design to request</li>
+                <li>✓ Click on order t-shirt to request</li>
                 <li>✓ Select your preferred size</li>
-                <li>✓ Complete payment process</li>
+                <li>✓ Receive an email to complete payment process</li>
               </ul>
             </div>
             <div>
               <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-blue-600">🚚</span> Delivery & Returns
+                <span className="text-blue-600">🚚</span> Delivery Process
               </h3>
               <ul className="text-gray-700 space-y-2 text-sm">
-                <li>✓ Will be ready within 5-7 days</li>
-                <li>✓ Our committee will get in touch</li>
+                <li>✓ T-shirt will be ready within 1-3 days</li>
+                <li>✓ Our LASUMBA committee will get in touch</li>
                 <li>✓ Student support available</li>
               </ul>
             </div>

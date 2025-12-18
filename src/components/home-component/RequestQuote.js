@@ -63,15 +63,15 @@ export default function RequestQuote() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-            Order Your Customized T-Shirt Today!
+            Order Your LASUMBA T-Shirt Today!
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Fill out the form below to request your T-Shirt. Our committee will get in touch with you shortly.
+            Fill out the form below to request your LASUMBA T-Shirt. Our committee will get in touch with you shortly.
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-12 max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 lg:p-12 max-w-4xl mx-auto">
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}
             <div>

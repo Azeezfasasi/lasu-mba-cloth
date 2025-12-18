@@ -12,8 +12,8 @@ export default function CallToAction() {
             </h2>
 
             <p className="text-blue-100 mb-8">
-              Customize your celebration wear with bespoke LASU postgraduate T-Shirt and branded apparel.
-              Perfect for convocations, events, and networking occasions. Make a lasting impression!
+              Customize your celebration wear with LASUMBA T-Shirt and branded apparel.
+              Perfect for events and networking occasions. Make a lasting impression!
             </p>
 
             {/* CTA Buttons */}
@@ -22,7 +22,7 @@ export default function CallToAction() {
                 href="/custom-uniforms"
                 className="bg-white text-blue-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-gray-100 transition text-center"
               >
-                Order Custom T-Shirt
+                Order LASUMBA T-Shirt
               </a>
               <a
                 href="/gallery"
