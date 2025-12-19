@@ -244,11 +244,11 @@ export default function EditGalleryPage() {
               </select>
             </div>
 
-            {/* Business Info */}
+            {/* Activity Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Business Name
+                  Activity Name
                 </label>
                 <input
                   type="text"
@@ -256,7 +256,7 @@ export default function EditGalleryPage() {
                   value={formData.businessName}
                   onChange={handleInputChange}
                   className="w-full px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Business name"
+                  placeholder="Activity name"
                 />
               </div>
               <div>
