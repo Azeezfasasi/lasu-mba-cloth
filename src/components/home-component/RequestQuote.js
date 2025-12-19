@@ -35,7 +35,7 @@ export default function RequestQuote() {
       });
       const data = await res.json();
       if (data.success) {
-        setSuccess("Thank you! Your request has been submitted.");
+        setSuccess("Thank you! Your request has been submitted. A confirmation email has been sent to you for further actions.");
         setFormData({
           name: "",
           email: "",
