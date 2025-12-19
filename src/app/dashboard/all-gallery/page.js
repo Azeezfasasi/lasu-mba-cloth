@@ -6,7 +6,7 @@ import { fetchGalleries, deleteGallery } from '@/app/utils/galleryApi';
 import { Plus, Edit, Trash2, Eye, Loader, Search } from 'lucide-react';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 
-const CATEGORIES = ['project', 'engineering', 'fibre', 'maintenance', 'other'];
+const CATEGORIES = ['lasumba games', 'events', 'lasumba t-shirt', 'other'];
 
 export default function AllGalleriesPage() {
   const router = useRouter();
