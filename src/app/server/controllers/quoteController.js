@@ -8,6 +8,9 @@ import {
   sendQuoteStatusUpdate,
   sendQuoteReplyNotification,
   sendAdminQuoteNotification,
+  sendAdminQuoteStatusUpdate,
+  sendAdminQuoteReplyNotification,
+  sendAdminAssignmentNotification,
 } from "../services/emailService";
 
 // 1. Create quote request
@@ -101,7 +104,7 @@ export const changeQuoteStatus = async (req, quoteId) => {
 
     // Send admin notification about status change
     try {
-      await sendAdminQuoteNotification(quote);
+      await sendAdminQuoteStatusUpdate(quote, oldStatus);
     } catch (emailError) {
       console.log("Failed to send admin notification about status change:", emailError.message);
     }
@@ -144,7 +147,7 @@ export const replyToQuote = async (req, quoteId) => {
 
     // Send admin notification about the reply
     try {
-      await sendAdminQuoteNotification(quote);
+      await sendAdminQuoteReplyNotification(quote, sender.firstName + ' ' + sender.lastName, message);
     } catch (emailError) {
       console.log("Failed to send admin notification about reply:", emailError.message);
     }
@@ -221,7 +224,7 @@ export const assignQuote = async (req, quoteId) => {
 
     // Send admin notification about assignment
     try {
-      await sendAdminQuoteNotification(quote);
+      await sendAdminAssignmentNotification(quote, assignedUser);
     } catch (emailError) {
       console.log("Failed to send admin notification about assignment:", emailError.message);
     }

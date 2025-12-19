@@ -419,6 +419,310 @@ export const sendAdminQuoteNotification = async (quoteData) => {
   });
 };
 
+/**
+ * Send quote status update email to admin
+ */
+export const sendAdminQuoteStatusUpdate = async (quoteData, oldStatus) => {
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.warn("ADMIN_EMAIL not configured in environment variables");
+    return;
+  }
+
+  const statusColors = {
+    pending: "#FF9800",
+    replied: "#2196F3",
+    approved: "#4CAF50",
+    rejected: "#F44336",
+    expired: "#9E9E9E",
+  };
+
+  const statusColor = statusColors[quoteData.status] || "#2196F3";
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .header { background-color: ${statusColor}; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .content { padding: 20px; }
+        .status-change { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid ${statusColor}; }
+        .details-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .details-table td { padding: 10px; border-bottom: 1px solid #ddd; }
+        .details-table td:first-child { font-weight: bold; width: 30%; background-color: #f0f0f0; }
+        .status-badge { display: inline-block; background-color: ${statusColor}; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; margin: 5px 5px 5px 0; }
+        .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>T-Shirt Request Status Updated</h2>
+        </div>
+        <div class="content">
+          <p>Dear Admin Committee,</p>
+          <p>A T-Shirt request status has been updated and requires your attention.</p>
+          
+          <div class="status-change">
+            <p><strong>Status Change:</strong></p>
+            <p><span class="status-badge">${(oldStatus || "N/A").toUpperCase()}</span> → <span class="status-badge">${quoteData.status.toUpperCase()}</span></p>
+          </div>
+
+          <p><strong>Request Details:</strong></p>
+          <table class="details-table">
+            <tr>
+              <td>Reference ID:</td>
+              <td>${quoteData._id}</td>
+            </tr>
+            <tr>
+              <td>Student Name:</td>
+              <td>${quoteData.name || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>${quoteData.email || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>${quoteData.phone || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Level:</td>
+              <td>${quoteData.company || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Design Type:</td>
+              <td>${quoteData.designType || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>T-shirt Size:</td>
+              <td>${quoteData.service || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Current Status:</td>
+              <td><span class="status-badge">${quoteData.status.toUpperCase()}</span></td>
+            </tr>
+            ${quoteData.details ? `<tr><td>Status Details:</td><td>${quoteData.details}</td></tr>` : ""}
+            <tr>
+              <td>Last Updated:</td>
+              <td>${new Date(quoteData.updatedAt || Date.now()).toLocaleString()}</td>
+            </tr>
+          </table>
+
+          <p>Please log in to the admin panel to take any necessary actions.</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
+        </div>
+        <div class="footer">
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `T-Shirt Request Status Updated: ${quoteData.status.toUpperCase()} - ID: ${quoteData._id}`,
+    html,
+  });
+};
+
+/**
+ * Send quote reply notification to admin
+ */
+export const sendAdminQuoteReplyNotification = async (quoteData, senderName, message) => {
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.warn("ADMIN_EMAIL not configured in environment variables");
+    return;
+  }
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .header { background-color: #2196F3; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .content { padding: 20px; }
+        .message-box { background-color: #f0f0f0; padding: 15px; border-left: 4px solid #2196F3; margin: 15px 0; border-radius: 5px; }
+        .sender-info { background-color: #e3f2fd; padding: 12px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #2196F3; }
+        .details-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .details-table td { padding: 10px; border-bottom: 1px solid #ddd; }
+        .details-table td:first-child { font-weight: bold; width: 30%; background-color: #f0f0f0; }
+        .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>New Reply Sent to T-Shirt Request</h2>
+        </div>
+        <div class="content">
+          <p>Dear Admin Committee,</p>
+          <p>A reply has been sent to a T-Shirt request from a committee member.</p>
+          
+          <div class="sender-info">
+            <p><strong>Sent By:</strong> ${senderName}</p>
+            <p><strong>Sent At:</strong> ${new Date().toLocaleString()}</p>
+          </div>
+
+          <p><strong>Quote Details:</strong></p>
+          <table class="details-table">
+            <tr>
+              <td>Reference ID:</td>
+              <td>${quoteData._id}</td>
+            </tr>
+            <tr>
+              <td>Student Name:</td>
+              <td>${quoteData.name || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>${quoteData.email || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>${quoteData.phone || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Level:</td>
+              <td>${quoteData.company || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Status:</td>
+              <td>${quoteData.status}</td>
+            </tr>
+          </table>
+
+          <p><strong>Reply Message:</strong></p>
+          <div class="message-box">
+            <p>${message}</p>
+          </div>
+
+          <p>The student has been notified of this reply and can view it in their account.</p>
+          <p>Please log in to the admin panel for more details or to take further actions.</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
+        </div>
+        <div class="footer">
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `New Reply Sent to T-Shirt Request - ID: ${quoteData._id}`,
+    html,
+  });
+};
+
+/**
+ * Send admin notification about quote assignment
+ */
+export const sendAdminAssignmentNotification = async (quoteData, assignedUser) => {
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.warn("ADMIN_EMAIL not configured in environment variables");
+    return;
+  }
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .header { background-color: #9C27B0; color: white; padding: 20px; border-radius: 5px 5px 0 0; text-align: center; }
+        .content { padding: 20px; }
+        .assignment-box { background-color: #f3e5f5; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #9C27B0; }
+        .details-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .details-table td { padding: 10px; border-bottom: 1px solid #ddd; }
+        .details-table td:first-child { font-weight: bold; width: 30%; background-color: #f0f0f0; }
+        .footer { background-color: #f0f0f0; padding: 10px; text-align: center; font-size: 12px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>T-Shirt Request Assigned</h2>
+        </div>
+        <div class="content">
+          <p>Dear Admin Committee,</p>
+          <p>A T-Shirt request has been assigned to a committee member for processing.</p>
+          
+          <div class="assignment-box">
+            <p><strong>Assigned To:</strong> ${assignedUser.firstName} ${assignedUser.lastName}</p>
+            <p><strong>Assignment Time:</strong> ${new Date().toLocaleString()}</p>
+          </div>
+
+          <p><strong>Request Details:</strong></p>
+          <table class="details-table">
+            <tr>
+              <td>Reference ID:</td>
+              <td>${quoteData._id}</td>
+            </tr>
+            <tr>
+              <td>Student Name:</td>
+              <td>${quoteData.name || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>${quoteData.email || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>${quoteData.phone || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Level:</td>
+              <td>${quoteData.company || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Design Type:</td>
+              <td>${quoteData.designType || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>T-shirt Size:</td>
+              <td>${quoteData.service || "N/A"}</td>
+            </tr>
+            <tr>
+              <td>Current Status:</td>
+              <td>${quoteData.status}</td>
+            </tr>
+            <tr>
+              <td>Submitted Date:</td>
+              <td>${new Date(quoteData.createdAt).toLocaleString()}</td>
+            </tr>
+          </table>
+
+          <p><strong>Request Notes:</strong></p>
+          <p>${quoteData.message || "N/A"}</p>
+
+          <p>The assigned committee member will handle this request. Please ensure proper follow-up and timely processing.</p>
+          <p>Best regards,<br>LASUMBA Games Committee</p>
+        </div>
+        <div class="footer">
+          <p>&copy; 2025 LASUMBA Games. All rights reserved.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `T-Shirt Request Assigned to ${assignedUser.firstName} ${assignedUser.lastName} - ID: ${quoteData._id}`,
+    html,
+  });
+};
+
 export default {
   sendEmail,
   sendVerificationEmail,
@@ -427,4 +731,7 @@ export default {
   sendQuoteStatusUpdate,
   sendQuoteReplyNotification,
   sendAdminQuoteNotification,
+  sendAdminQuoteStatusUpdate,
+  sendAdminQuoteReplyNotification,
+  sendAdminAssignmentNotification,
 };

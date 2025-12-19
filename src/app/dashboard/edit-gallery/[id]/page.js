@@ -22,7 +22,7 @@ export default function EditGalleryPage() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: 'project',
+    category: 'other',
     featured: false,
     status: 'active',
     businessName: '',
