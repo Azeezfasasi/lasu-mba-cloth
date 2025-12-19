@@ -7,8 +7,8 @@ import { fetchGallery, updateGallery, uploadImageToCloudinary, deleteImageFromCl
 import { Upload, X, Loader, ArrowLeft } from 'lucide-react';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 
-const CATEGORIES = ['project', 'engineering', 'fibre', 'maintenance', 'other'];
-const TAGS = ['vip', 'active', 'engaged', 'new', 'featured', 'recommended'];
+const CATEGORIES = ['lasumba games', 'events', 'lasumba t-shirt', 'other'];
+const TAGS = ['lasumba', 'games', 't-shirt', 'students', 'events', 'fun'];
 
 export default function EditGalleryPage() {
   const router = useRouter();
