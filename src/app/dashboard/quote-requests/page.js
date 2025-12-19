@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react'
 import { useAuth } from '../../../context/AuthContext'
-import { Trash2, Eye, Reply, Search, Filter, ChevronLeft, ChevronRight, X, CheckCircle } from 'lucide-react'
+import { Trash2, Eye, Reply, Search, Filter, ChevronLeft, ChevronRight, X, CheckCircle, Download } from 'lucide-react'
 import { Commet } from "react-loading-indicators";
 
 const ManageQuoteRequests = () => {
@@ -72,6 +72,116 @@ const ManageQuoteRequests = () => {
 		setStatusFilter("all");
 		setFilteredRequests(applyFilters(requests, "", "all"));
 		setCurrentPage(1);
+	};
+
+	// Export to CSV
+	const exportToCSV = () => {
+		if (requests.length === 0) {
+			alert('No requests to export.');
+			return;
+		}
+
+		// Define CSV headers
+		const headers = [
+			'Name',
+			'Level',
+			'Email',
+			'Phone',
+			'T-Shirt Design Type',
+			'Size',
+			'Message',
+			'Status',
+			'Date Submitted',
+		];
+
+		// Convert requests to CSV rows
+		const rows = requests.map(request => [
+			`"${request.name}"`,
+			`"${request.company}"`,
+			`"${request.email}"`,
+			`"${request.phone}"`,
+			`"${request.designType}"`,
+			`"${request.service}"`,
+			`"${request.message.replace(/"/g, '""')}"`, // Escape quotes
+			`"${request.status}"`,
+			`"${formatDate(request.createdAt)}"`,
+		]);
+
+		// Combine headers and rows
+		const csvContent = [
+			headers.join(','),
+			...rows.map(row => row.join(',')),
+		].join('\n');
+
+		// Create blob and download
+		const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+		const link = document.createElement('a');
+		const url = URL.createObjectURL(blob);
+		link.setAttribute('href', url);
+		link.setAttribute('download', `t-shirt-requests-${new Date().toISOString().split('T')[0]}.csv`);
+		link.style.visibility = 'hidden';
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+
+		alert('Requests exported successfully!');
+	};
+
+	// Export to Excel
+	const exportToExcel = async () => {
+		if (requests.length === 0) {
+			alert('No requests to export.');
+			return;
+		}
+
+		try {
+			// Dynamic import of xlsx library
+			const XLSX = await import('xlsx');
+			const workbook = XLSX.default.utils.book_new();
+
+			// Prepare data
+			const data = requests.map(request => ({
+				Name: request.name,
+				Level: request.company,
+				Email: request.email,
+				Phone: request.phone,
+				'Design Type': request.designType,
+				Size: request.service,
+				Message: request.message,
+				Status: request.status,
+				'Date Submitted': formatDate(request.createdAt),
+			}));
+
+			// Create worksheet
+			const worksheet = XLSX.default.utils.json_to_sheet(data);
+
+			// Set column widths
+			worksheet['!cols'] = [
+				{ wch: 15 },
+				{ wch: 15 },
+				{ wch: 25 },
+				{ wch: 15 },
+				{ wch: 20 },
+				{ wch: 10 },
+				{ wch: 30 },
+				{ wch: 12 },
+				{ wch: 20 },
+			];
+
+			// Add worksheet to workbook
+			XLSX.default.utils.book_append_sheet(workbook, worksheet, 'Requests');
+
+			// Write file
+			XLSX.default.writeFile(
+				workbook,
+				`t-shirt-requests-${new Date().toISOString().split('T')[0]}.xlsx`
+			);
+
+			alert('Requests exported to Excel successfully!');
+		} catch (error) {
+			console.error('Failed to export to Excel:', error);
+			alert('Please install xlsx library: npm install xlsx');
+		}
 	};
 	const [requests, setRequests] = useState([])
 	const [filteredRequests, setFilteredRequests] = useState([])
@@ -328,14 +438,32 @@ const ManageQuoteRequests = () => {
 								</button>
 							</div>
 
-							{(searchQuery || statusFilter !== 'all') && (
-								<button
-									onClick={clearFilters}
-									className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 font-medium transition"
-								>
-									Clear Filters
-								</button>
-							)}
+							<div className="flex flex-col sm:flex-row gap-2">
+								{(searchQuery || statusFilter !== 'all') && (
+									<button
+										onClick={clearFilters}
+										className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 font-medium transition whitespace-nowrap"
+									>
+										Clear Filters
+									</button>
+								)}
+								<div className="flex gap-2">
+									<button
+										onClick={exportToCSV}
+										className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition flex items-center gap-2 whitespace-nowrap"
+									>
+										<Download className="w-4 h-4" />
+										Export CSV
+									</button>
+									{/* <button
+										onClick={exportToExcel}
+										className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium transition flex items-center gap-2 whitespace-nowrap"
+									>
+										<Download className="w-4 h-4" />
+										Export Excel
+									</button> */}
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
