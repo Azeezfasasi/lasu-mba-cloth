@@ -8,7 +8,6 @@ export default function RequestQuote() {
     phone: "",
     company: "",
     service: "",
-    // level: "",
     designType: "",
     nickname: "",
     message: "",
@@ -42,7 +41,6 @@ export default function RequestQuote() {
           phone: "",
           company: "",
           service: "",
-          // level: "",
           designType: "",
           nickname: "",
           message: "",
@@ -141,12 +139,12 @@ export default function RequestQuote() {
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-900"
               >
                 <option value="">-- Choose design type --</option>
-                <option value="White">White</option>
+                <option value="White LASUMBA T-Shirt">White</option>
                 <option value="Blue LASUMBA T-Shirt">Blue</option>
-                <option value="Blue LASUMBA T-Shirt">Navy Blue</option>
-                <option value="Blue LASUMBA T-Shirt">Royal Blue</option>
+                <option value="Navy Blue LASUMBA T-Shirt">Navy Blue</option>
+                <option value="Royal LASUMBA T-Shirt">Royal Blue</option>
                 <option value="Black LASUMBA T-Shirt">Black</option>
-                <option value="Black LASUMBA T-Shirt">Pink</option>
+                <option value="Pink LASUMBA T-Shirt">Pink</option>
               </select>
             </div>
 
