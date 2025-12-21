@@ -390,6 +390,7 @@ function EditClothModal({ cloth, onClose, onUpdate }) {
               onChange={handleInputChange}
               placeholder="Price"
               step="0.01"
+              min="0"
               className="px-3 sm:px-4 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
           </div>

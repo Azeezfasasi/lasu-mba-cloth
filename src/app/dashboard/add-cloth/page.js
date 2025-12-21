@@ -117,7 +117,7 @@ const AddCloth = () => {
 
     try {
       // Validation
-      if (!formData.name || !formData.description || !formData.price || !formData.color || !formData.material) {
+      if (!formData.name || !formData.description || formData.price === '' || !formData.color || !formData.material) {
         setError('Please fill in all required fields')
         setLoading(false)
         return
@@ -219,7 +219,7 @@ const AddCloth = () => {
                     name="price"
                     value={formData.price}
                     onChange={handleInputChange}
-                    placeholder="25000"
+                    placeholder="20000"
                     step="0.01"
                     min="0"
                     className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
