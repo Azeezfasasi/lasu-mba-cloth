@@ -38,6 +38,7 @@ export default function MainHeader() {
     { href: '/', label: 'Home' },
     { href: '/about-us', label: 'About LASUMBA Games' },
     { href: '/request-a-quote', label: 'Order T-Shirt' },
+    { href: '/volunteer', label: 'Volunteer' },
     { href: '/blog', label: 'Blog' },
     { href: '/contact-us', label: 'Contact Us' }
   ]

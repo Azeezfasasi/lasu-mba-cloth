@@ -66,7 +66,7 @@ export default function DashboardMenu({ collapsed, mobileOpen = false, onClose =
         { href: '/dashboard/all-cloth', label: 'All T-Shirt Details', roles: ['admin', 'staff-member'] }
       ]
     },
-    // { href: '/projects', label: 'Completed Projects', icon: 'projects', roles: ['client'] },
+    { href: '/dashboard/lasumba-volunteers', label: 'LASUMBA Volunteers', icon: 'projects', roles: ['admin', 'staff-member'] },
     {
       href: '/dashboard/blog',
       label: 'Blog',
