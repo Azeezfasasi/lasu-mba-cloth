@@ -16,7 +16,6 @@ const volunteerSchema = new mongoose.Schema({
     type: String,
     required: true,
     lowercase: true,
-    // index: true,
   },
   phone: {
     type: String,

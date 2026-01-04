@@ -14,6 +14,18 @@ export const createVolunteer = async (req) => {
     await connectDB();
     const body = await req.json();
 
+    // Drop old indexes on first submission (migration)
+    try {
+      const collection = Volunteer.collection;
+      const indexes = await collection.getIndexes();
+      if (indexes.studentId_1) {
+        await collection.dropIndex("studentId_1");
+        console.log("✅ Dropped old studentId_1 index");
+      }
+    } catch (indexError) {
+      console.log("ℹ️ Index cleanup skipped:", indexError.message);
+    }
+
     // Check if email already submitted
     const existingVolunteer = await Volunteer.findOne({
       email: body.email,

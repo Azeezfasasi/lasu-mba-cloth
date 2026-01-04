@@ -124,8 +124,13 @@ export const sendVolunteerApplicationEmail = async (volunteer) => {
         </html>
       `;
 
-      // Send to all admins
-      for (const admin of admins) {
+      // Send to all admins with slight delay to prevent rate limiting
+      for (let i = 0; i < admins.length; i++) {
+        const admin = admins[i];
+        if (i > 0) {
+          // Small delay between admin emails (500ms)
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
         await sendEmailViaZoho({
           to: admin.email,
           subject: `LASUMBA Games - New Volunteer Application from ${volunteer.firstName} ${volunteer.lastName}`,
@@ -262,8 +267,13 @@ export const sendStatusChangeEmail = async (volunteer, newStatus) => {
         </html>
       `;
 
-      // Send to all admins
-      for (const admin of admins) {
+      // Send to all admins with slight delay to prevent rate limiting
+      for (let i = 0; i < admins.length; i++) {
+        const admin = admins[i];
+        if (i > 0) {
+          // Small delay between admin emails (500ms)
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
         await sendEmailViaZoho({
           to: admin.email,
           subject: `LASUMBA Games 2026 - Volunteer Status Updated: ${volunteer.firstName} ${volunteer.lastName} (${newStatus.toUpperCase()})`,
@@ -395,8 +405,13 @@ export const sendNoteNotificationEmail = async (volunteer, noteMessage) => {
         </html>
       `;
 
-      // Send to all admins
-      for (const admin of admins) {
+      // Send to all admins with slight delay to prevent rate limiting
+      for (let i = 0; i < admins.length; i++) {
+        const admin = admins[i];
+        if (i > 0) {
+          // Small delay between admin emails (500ms)
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
         await sendEmailViaZoho({
           to: admin.email,
           subject: `LASUMBA Games 2026 - Note Added to ${volunteer.firstName} ${volunteer.lastName}'s Application`,

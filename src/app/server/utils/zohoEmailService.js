@@ -9,13 +9,20 @@ const zohoEmail = process.env.ZOHO_SENDER_EMAIL;
 const zohoAppPassword = process.env.ZOHO_APP_PASSWORD;
 const zohoSenderName = process.env.ZOHO_SENDER_NAME || 'Rayob Engineering';
 
-// Create Zoho transporter
+// Reusable transporter with connection pooling
+let transporter = null;
+
 const getZohoTransporter = () => {
   if (!zohoEmail || !zohoAppPassword) {
     throw new Error('Zoho email credentials not configured. Set ZOHO_SENDER_EMAIL and ZOHO_APP_PASSWORD');
   }
 
-  return nodemailer.createTransport({
+  // Reuse existing transporter if available
+  if (transporter) {
+    return transporter;
+  }
+
+  transporter = nodemailer.createTransport({
     host: 'smtp.zoho.com',
     port: 587,
     secure: false,
@@ -23,88 +30,131 @@ const getZohoTransporter = () => {
       user: zohoEmail,
       pass: zohoAppPassword,
     },
+    // Improved timeout and connection settings
+    connectionTimeout: 10000, // 10 seconds
+    socketTimeout: 10000, // 10 seconds
+    greetingTimeout: 10000, // 10 seconds for SMTP greeting
+    logger: true,
+    debug: false,
+    pool: {
+      maxConnections: 5,
+      maxMessages: 100,
+      rateDelta: 20000, // 20 second window
+      rateLimit: 5, // 5 messages per rateDelta
+    },
   });
+
+  return transporter;
 };
 
 /**
- * Send email via Zoho Mail using App Password
+ * Send email via Zoho Mail using App Password with retry logic
  * @param {Object} emailData - Email configuration
+ * @param {Number} retries - Number of retry attempts
  * @returns {Promise<Object>} Response from nodemailer
  */
-export const sendEmailViaZoho = async (emailData) => {
-  try {
-    const {
-      to,
-      subject,
-      htmlContent,
-      textContent,
-      senderEmail = zohoEmail,
-      senderName = zohoSenderName,
-      cc = [],
-      bcc = [],
-      replyTo = null,
-    } = emailData;
+export const sendEmailViaZoho = async (emailData, retries = 2) => {
+  const maxRetries = retries;
+  let lastError = null;
 
-    if (!senderEmail) {
-      throw new Error('ZOHO_SENDER_EMAIL is not configured');
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const {
+        to,
+        subject,
+        htmlContent,
+        textContent,
+        senderEmail = zohoEmail,
+        senderName = zohoSenderName,
+        cc = [],
+        bcc = [],
+        replyTo = null,
+      } = emailData;
+
+      if (!senderEmail) {
+        throw new Error('ZOHO_SENDER_EMAIL is not configured');
+      }
+
+      if (attempt === 0) {
+        console.log('📧 Sending email via Zoho:', {
+          to,
+          subject,
+          senderEmail,
+          senderName,
+        });
+      } else {
+        console.log(`🔄 Retry attempt ${attempt}/${maxRetries} for email to ${to}`);
+      }
+
+      const transporter = getZohoTransporter();
+
+      const mailOptions = {
+        from: `"${senderName}" <${senderEmail}>`,
+        to: Array.isArray(to) ? to.join(',') : to,
+        subject,
+        html: htmlContent || '',
+        text: textContent || subject,
+      };
+
+      // Add optional fields
+      if (cc.length > 0) {
+        mailOptions.cc = Array.isArray(cc) ? cc.join(',') : cc;
+      }
+
+      if (bcc.length > 0) {
+        mailOptions.bcc = Array.isArray(bcc) ? bcc.join(',') : bcc;
+      }
+
+      if (replyTo) {
+        mailOptions.replyTo = replyTo;
+      }
+
+      console.log('📤 Zoho Email Payload:', {
+        from: mailOptions.from,
+        to: mailOptions.to,
+        subject: mailOptions.subject,
+        hasHtml: !!mailOptions.html,
+      });
+
+      const info = await transporter.sendMail(mailOptions);
+
+      console.log('✓ Email sent successfully via Zoho:', info.messageId);
+
+      return {
+        success: true,
+        status: 200,
+        messageId: info.messageId,
+        response: info.response,
+      };
+    } catch (error) {
+      lastError = error;
+      
+      if (attempt === maxRetries) {
+        console.error('❌ Zoho email send error (final):', error);
+        return {
+          success: false,
+          status: 500,
+          error: error.message,
+          details: error,
+          attempts: attempt + 1,
+        };
+      }
+
+      // Wait before retrying (exponential backoff)
+      const waitTime = Math.min(1000 * Math.pow(2, attempt), 5000);
+      console.warn(`⚠️ Email send failed (attempt ${attempt + 1}), retrying in ${waitTime}ms...`);
+      
+      await new Promise(resolve => setTimeout(resolve, waitTime));
     }
-
-    console.log('📧 Sending email via Zoho:', {
-      to,
-      subject,
-      senderEmail,
-      senderName,
-    });
-
-    const transporter = getZohoTransporter();
-
-    const mailOptions = {
-      from: `"${senderName}" <${senderEmail}>`,
-      to: Array.isArray(to) ? to.join(',') : to,
-      subject,
-      html: htmlContent || '',
-      text: textContent || subject,
-    };
-
-    // Add optional fields
-    if (cc.length > 0) {
-      mailOptions.cc = Array.isArray(cc) ? cc.join(',') : cc;
-    }
-
-    if (bcc.length > 0) {
-      mailOptions.bcc = Array.isArray(bcc) ? bcc.join(',') : bcc;
-    }
-
-    if (replyTo) {
-      mailOptions.replyTo = replyTo;
-    }
-
-    console.log('📤 Zoho Email Payload:', {
-      from: mailOptions.from,
-      to: mailOptions.to,
-      subject: mailOptions.subject,
-      hasHtml: !!mailOptions.html,
-    });
-
-    const info = await transporter.sendMail(mailOptions);
-
-    console.log('✓ Email sent successfully via Zoho:', info.messageId);
-
-    return {
-      success: true,
-      status: 200,
-      messageId: info.messageId,
-      response: info.response,
-    };
-  } catch (error) {
-    console.error('❌ Zoho email send error:', error);
-    return {
-      success: false,
-      status: 500,
-      error: error.message,
-      details: error,
-    };
   }
+
+  // This shouldn't be reached, but just in case
+  return {
+    success: false,
+    status: 500,
+    error: lastError?.message || 'Unknown error',
+    details: lastError,
+  };
 };
 
 /**
